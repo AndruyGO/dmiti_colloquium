@@ -50,6 +50,10 @@ big_N SUB_NN_N(const big_N& x, const big_N& y) {
 }
 
 big_N GCF_NN_N(big_N x, big_N y) {
+    if (!NZER_N_B(x))
+        return y;
+    if (!NZER_N_B(y))
+        return x;
     while (NZER_N_B(y)) {
         big_N r = MOD_NN_N(x, y);
         x = y;
@@ -59,6 +63,8 @@ big_N GCF_NN_N(big_N x, big_N y) {
 }
 
 big_N LCM_NN_N(big_N x, big_N y) {
+    if( !NZER_N_B(x) || !NZER_N_B(y))
+        return big_N("0");
     big_N gcf = GCF_NN_N(x, y);
     return MUL_NN_N(DIV_NN_N(x, gcf), y);
 }
