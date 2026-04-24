@@ -64,7 +64,7 @@ big_N GCF_NN_N(big_N x, big_N y) {
 
 big_N LCM_NN_N(big_N x, big_N y) {
     if( !NZER_N_B(x) || !NZER_N_B(y))
-        return big_N("0");
+        return big_N("");
     big_N gcf = GCF_NN_N(x, y);
     return MUL_NN_N(DIV_NN_N(x, gcf), y);
 }
