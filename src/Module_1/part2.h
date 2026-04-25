@@ -1,3 +1,4 @@
+#pragma once
 #include "part0.h"
 
 big_N MUL_ND_N(big_N n, char digit);

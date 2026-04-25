@@ -1,3 +1,4 @@
+#pragma once
 #include "part0.h"
 
 int COM_NN_D(const big_N& x,const big_N& y);
