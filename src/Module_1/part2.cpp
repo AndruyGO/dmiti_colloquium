@@ -3,6 +3,7 @@
 
 
 big_N MUL_ND_N(big_N n, char digit) {
+    if (digit < 0 || digit > 9) return big_N("");
     unsigned long size = n.digits.size();
     char remn = 0;
     char num;
@@ -19,7 +20,8 @@ big_N MUL_ND_N(big_N n, char digit) {
     return n;
 }
 
-big_N MUL_Nk_N(big_N n, unsigned long k) {
+big_N MUL_Nk_N(big_N n, long long k) {
+    if (k < 0) return big_N("");
     unsigned long size = n.digits.size()+k;
     n.digits.resize(size);
     for (unsigned long i = size-k; i > 0; i--) {
