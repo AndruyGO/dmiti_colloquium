@@ -1,0 +1,9 @@
+---
+SpaceBeforeCpp11BracedList: true
+SpaceBeforeInheritanceColon: false
+QualifierAlignment: Left
+SortIncludes:
+  Enabled: false
+ReferenceAlignment: Pointer
+PointerAlignment: Left
+
