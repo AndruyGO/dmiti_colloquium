@@ -10,7 +10,7 @@
 #define SMALLER 1
 #define EQUAL 0
 
-char DIV_NN_Dk(const big_N& x, const big_N& y, u32 k) {
+char DIV_NN_Dk(const big_N& x, const big_N& y, i64 k) {
   big_N mul_y("");
   if (k == 0)
     mul_y = y;
@@ -27,7 +27,7 @@ char DIV_NN_Dk(const big_N& x, const big_N& y, u32 k) {
 big_N DIV_NN_N(const big_N& x, const big_N& y) {
   if (COM_NN_D(y, big_N("0")) == EQUAL)
     return big_N("");
-  u32 cmp = COM_NN_D(x, y);
+  i64 cmp = COM_NN_D(x, y);
 
   if (cmp == SMALLER)
     return big_N("0");
@@ -38,7 +38,7 @@ big_N DIV_NN_N(const big_N& x, const big_N& y) {
   std::vector<char> result {};
 
   while (COM_NN_D(remainder, y) == BIGGER) {
-    u32 k;
+    i64 k;
 
     if (COM_NN_D(remainder, MUL_Nk_N(y, remainder.digits.size() -
                                             y.digits.size())) != SMALLER)
