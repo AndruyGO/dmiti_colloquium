@@ -1,5 +1,6 @@
 #include "part0.h"
 #include "part1.h"
+#include "part4.h"
 
 
 big_N MUL_ND_N(big_N n, char digit) {
@@ -20,7 +21,7 @@ big_N MUL_ND_N(big_N n, char digit) {
     return n;
 }
 
-big_N MUL_Nk_N(big_N n, long long k) {
+big_N MUL_Nk_N(big_N n, unsigned long k) {
     if (k < 0) return big_N("");
     unsigned long size = n.digits.size()+k;
     n.digits.resize(size);

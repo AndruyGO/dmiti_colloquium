@@ -1,4 +1,5 @@
 #pragma once
+#include <cstddef>
 #include <iostream>
 #include <vector>
 #include <string>
@@ -10,7 +11,7 @@ class big_N{
 
     vector<char> digits; /// "123" -> [3] [2] [1]
     friend ostream& operator<<(ostream& os, const big_N& obj);
-
+	big_N(){}
     big_N(const vector<char> &_digits){
         digits.resize(_digits.size());
         for(int i = 0; i < digits.size(); i++){

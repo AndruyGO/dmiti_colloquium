@@ -3,7 +3,7 @@
 #include "part2.h"
 #include "part4.h"
 
-int COM_NN_D(const big_N& x,const big_N& y){
+char COM_NN_D(const big_N& x,const big_N& y){
     if (x.digits.size() > y.digits.size())
         return 2;
     if (x.digits.size() < y.digits.size())
