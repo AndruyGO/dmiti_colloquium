@@ -3,7 +3,7 @@
 #include "part3.h"
 
 int NZER_N_B(const big_N& n) {
-    if (n.digits.size() == 1 && n[0] == 0){
+    if (n.digits.size() == 1 && n.digits[0] == 0){
         return 0;
     }
     return 1;
@@ -25,7 +25,7 @@ big_N ADD_1N_N(big_N n){
     return n;
 }
 
-big_N ADD_NN_N(big_N n1, big_N n2) {
+big_N ADD_NN_N(const big_N &n1, const big_N &n2) {
     big_N result("");
     result.digits.clear(); 
     
@@ -49,7 +49,7 @@ big_N ADD_NN_N(big_N n1, big_N n2) {
 big_N SUB_NDN_N(const big_N& n1, const big_N& n2, int k) {
     big_N mul_n2 = MUL_ND_N(n2, k);
     int cmp = COM_NN_D(n1, mul_n2);
-    if (cmp == 2 || cmp == 0) {
+    if (cmp != 1) {
         return SUB_NN_N(n1, mul_n2);
     }
     return big_N("");
