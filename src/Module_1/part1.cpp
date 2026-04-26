@@ -4,12 +4,14 @@
 #include "part3.h"
 #include "part4.h"
 
+#include <algorithm>
+
 #define BIGGER 2
 #define SMALLER 1
 #define EQUAL 0
 
 char DIV_NN_Dk(const big_N& x, const big_N& y, u32 k) {
-  big_N mul_y;
+  big_N mul_y("");
   if (k == 0)
     mul_y = y;
   else
@@ -49,7 +51,7 @@ big_N DIV_NN_N(const big_N& x, const big_N& y) {
       break;
 
     result.push_back(digit);
-    big_N temp;
+    big_N temp("");
     // Проверка на ноль так как MUL_Nk_N при k = 0 иначе че то не то возвращает
     if (k == 0)
       temp = y;
@@ -61,7 +63,8 @@ big_N DIV_NN_N(const big_N& x, const big_N& y) {
     remainder = SUB_NDN_N(remainder, temp, digit);
   }
 
-  big_N quotinent = big_N::from_reverse_vec(result);
+  std::reverse(result.begin(), result.end());
+  big_N quotinent = big_N {result};
 
   return quotinent;
 }
