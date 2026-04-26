@@ -6,11 +6,7 @@
 
 #include <algorithm>
 
-#define BIGGER 2
-#define SMALLER 1
-#define EQUAL 0
-
-char DIV_NN_Dk(const big_N& x, const big_N& y, i64 k) {
+char DIV_NN_Dk(const big_N& x, const big_N& y, long long k) {
   big_N mul_y("");
   if (k == 0)
     mul_y = y;
@@ -18,30 +14,30 @@ char DIV_NN_Dk(const big_N& x, const big_N& y, i64 k) {
     mul_y = MUL_Nk_N(y, k);
 
   char i = 1;
-  while (i < 10 && COM_NN_D(x, MUL_ND_N(mul_y, i)) != SMALLER)
+  while (i < 10 && COM_NN_D(x, MUL_ND_N(mul_y, i)) != 1)
     ++i;
 
   return i - 1;
 }
 
 big_N DIV_NN_N(const big_N& x, const big_N& y) {
-  if (COM_NN_D(y, big_N("0")) == EQUAL)
+  if (COM_NN_D(y, big_N("0")) == 0)
     return big_N("");
-  i64 cmp = COM_NN_D(x, y);
+  char cmp = COM_NN_D(x, y);
 
-  if (cmp == SMALLER)
+  if (cmp == 1)
     return big_N("0");
-  else if (cmp == EQUAL)
+  else if (cmp == 0)
     return big_N("1");
 
   big_N remainder = big_N {x};
   std::vector<char> result {};
 
-  while (COM_NN_D(remainder, y) == BIGGER) {
-    i64 k;
+  while (COM_NN_D(remainder, y) == 2) {
+   long long k;
 
     if (COM_NN_D(remainder, MUL_Nk_N(y, remainder.digits.size() -
-                                            y.digits.size())) != SMALLER)
+                                            y.digits.size())) != 1)
       k = remainder.digits.size() - y.digits.size();
     else if (remainder.digits.size() > 1)
       k = remainder.digits.size() - y.digits.size() - 1;
@@ -70,7 +66,7 @@ big_N DIV_NN_N(const big_N& x, const big_N& y) {
 }
 
 big_N MOD_NN_N(const big_N& x, const big_N& y) {
-  if (COM_NN_D(y, big_N("0")) == EQUAL)
+  if (COM_NN_D(y, big_N("0")) == 0)
     return big_N("");
   big_N quotinent = DIV_NN_N(x, y);
   return SUB_NN_N(x, MUL_NN_N(quotinent, y));
