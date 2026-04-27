@@ -22,6 +22,7 @@ char DIV_NN_Dk(const big_N& n, const big_N& m, long long k) {
 }
 
 big_N DIV_NN_N(const big_N& n, const big_N& m) {
+    if(NZER_N_B(m) == 0) return big_N("");
     // Если n < m, частное 0
     if (COM_NN_D(n, m) == 1) {
         return big_N("0");
