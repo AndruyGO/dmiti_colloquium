@@ -4,70 +4,53 @@
 #include "part3.h"
 #include "part4.h"
 
-#include <algorithm>
-
-char DIV_NN_Dk(const big_N& x, const big_N& y, long long k) {
-  big_N mul_y("");
-  if (k == 0)
-    mul_y = y;
-  else
-    mul_y = MUL_Nk_N(y, k);
-
-  char i = 1;
-  while (i < 10 && COM_NN_D(x, MUL_ND_N(mul_y, i)) != 1)
-    ++i;
-
-  return i - 1;
+char DIV_NN_Dk(const big_N& n, const big_N& m, long long k) {
+    // Вычисление m * 10^k
+    big_N shifted = MUL_Nk_N(m, k);
+    // Если делимое меньше сдвинутого делителя, первая цифра 0
+    if (COM_NN_D(n, shifted) == 1) {
+        return 0;
+    }
+    // Поиск наибольшей цифры d (1..9), такой что d * (m*10^k) <= n
+    for (char d = 9; d >= 1; --d) {
+        big_N product = MUL_ND_N(shifted, d);
+        if (COM_NN_D(n, product) != 1) { // n >= product
+            return d;
+        }
+    }
+    return 0;
 }
 
-big_N DIV_NN_N(const big_N& x, const big_N& y) {
-  if (COM_NN_D(y, big_N("0")) == 0)
-    return big_N("");
-  char cmp = COM_NN_D(x, y);
-
-  if (cmp == 1)
-    return big_N("0");
-  else if (cmp == 0)
-    return big_N("1");
-
-  big_N remainder = big_N {x};
-  std::vector<char> result {};
-
-  while (COM_NN_D(remainder, y) == 2) {
-   long long k;
-
-    if (COM_NN_D(remainder, MUL_Nk_N(y, remainder.digits.size() -
-                                            y.digits.size())) != 1)
-      k = remainder.digits.size() - y.digits.size();
-    else if (remainder.digits.size() > 1)
-      k = remainder.digits.size() - y.digits.size() - 1;
-
-    char digit = DIV_NN_Dk(remainder, y, k);
-    if (digit == 0)
-      break;
-
-    result.push_back(digit);
-    big_N temp("");
-    // Проверка на ноль так как MUL_Nk_N при k = 0 иначе че то не то возвращает
-    if (k == 0)
-      temp = y;
-    else
-      // Приходится пересчитывать, хоть в DIV_NN_Dk это уже вычисляется
-      // Если не использовать DIV_NN_Dk то можно без этого обойтись но раз надо юзать то юзаю
-      temp = MUL_Nk_N(y, k);
-
-    remainder = SUB_NDN_N(remainder, temp, digit);
-  }
-
-  std::reverse(result.begin(), result.end());
-  big_N quotinent = big_N {result};
-
-  return quotinent;
+big_N DIV_NN_N(const big_N& n, const big_N& m) {
+    // Если n < m, частное 0
+    if (COM_NN_D(n, m) == 1) {
+        return big_N("0");
+    }
+    big_N remainder = n;
+    big_N quotient = big_N("0");
+    // Максимальный порядок k, на который можно сдвинуть делитель
+    int max_k = remainder.digits.size() - m.digits.size();
+    if (max_k < 0) max_k = 0;
+    for (long long k = max_k; k >= 0; --k) {
+        char d = DIV_NN_Dk(remainder, m, k);
+        if (d != 0) {
+            // Добавляем d * 10^k к частному
+            big_N digit_num = big_N(std::string(1, d + '0'));
+            big_N term = MUL_Nk_N(digit_num, k);
+            quotient = ADD_NN_N(quotient, term);
+            // Вычитаем d * (m * 10^k) из остатка
+            big_N m_shifted = MUL_Nk_N(m, k);
+            big_N to_sub = MUL_ND_N(m_shifted, d);
+            remainder = SUB_NN_N(remainder, to_sub);
+        }
+    }
+    return quotient;
 }
 
-big_N MOD_NN_N(const big_N& x, const big_N& y) {
-  if (COM_NN_D(y, big_N("0")) == 0)
-    return big_N("");
-  big_N quotinent = DIV_NN_N(x, y);
-  return SUB_NN_N(x, MUL_NN_N(quotinent, y));
+big_N MOD_NN_N(const big_N& n, const big_N& m) {
+    if (COM_NN_D(n, m) == 1)
+        return n;
+    big_N q = DIV_NN_N(n, m);
+    big_N product = MUL_NN_N(m, q);
+    return SUB_NN_N(n, product);
 }
