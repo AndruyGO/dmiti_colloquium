@@ -21,7 +21,7 @@ big_N MUL_ND_N(big_N n, char digit) {
     }
     return n;
 }
-// part2.cpp – исправленная MUL_Nk_N
+
 big_N MUL_Nk_N(big_N n, unsigned long k) {
     if (k == 0) return n;
     unsigned long size = n.digits.size();
@@ -37,8 +37,7 @@ big_N MUL_Nk_N(big_N n, unsigned long k) {
     return n;
 }
 
-// part2.cpp – исправленная MUL_NN_N
-big_N MUL_NN_N(big_N n, big_N m) {
+big_N MUL_NN_N(const big_N &n, const big_N &m) {
     big_N res = big_N("0");
     // Перебираем цифры второго числа от младших к старшим
     for (unsigned long i = 0; i < m.digits.size(); ++i) {

@@ -62,7 +62,7 @@ big_N GCF_NN_N(big_N x, big_N y) {
     return x;
 }
 
-big_N LCM_NN_N(big_N x, big_N y) {
+big_N LCM_NN_N(const big_N &x, const big_N &y) {
     if( !NZER_N_B(x) || !NZER_N_B(y))
         return big_N("");
     big_N gcf = GCF_NN_N(x, y);
