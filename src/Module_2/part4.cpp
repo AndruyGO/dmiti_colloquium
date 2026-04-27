@@ -1,7 +1,7 @@
 #include "../Module_1/part0.h"
 #include "part0.h"
 #include "part1.h"
-#include "part2.h"
+#include "../Module_1/part2.h"
 
 big_Z MUL_ZM_Z (big_Z z){
     z.sign = (z.sign == 1) ? -1 : 1;
