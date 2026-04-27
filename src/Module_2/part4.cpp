@@ -10,9 +10,7 @@ big_Z MUL_ZM_Z (big_Z z){
 big_Z MUL_ZZ_Z(const big_Z& z1,const big_Z& z2){
     big_Z res;
     if (SGN_Z_D(z1) == 0 || SGN_Z_D(z2) == 0){
-        res.sign = 1;
-        res.digits.push_back(0);
-        return res;
+        return big_Z("0");
     }
     else{
         res.sign = (SGN_Z_D(z1) == SGN_Z_D(z2)) ? 1 : -1;
