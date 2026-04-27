@@ -2,7 +2,7 @@
 #include "part2.h"
 #include "part3.h"
 
-int NZER_N_B(const big_N& n) {
+char NZER_N_B(const big_N& n) {
     if (n.digits.size() == 1 && n.digits[0] == 0){
         return 0;
     }
