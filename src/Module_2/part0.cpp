@@ -1,6 +1,8 @@
 #include "part0.h"
 #include "../Module_1/part4.h"
 
+bool ALWAYS_PRINT_SIGN = 1;
+
 char NZER_Z_B(const big_Z &n){
     return NZER_N_B(n.digits);
 }

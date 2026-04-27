@@ -8,7 +8,7 @@
 
 using namespace std;
 
-bool ALWAYS_PRINT_SIGN = 1;
+extern bool ALWAYS_PRINT_SIGN;
 
 class big_Z{
     public:
