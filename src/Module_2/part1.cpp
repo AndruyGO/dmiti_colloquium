@@ -11,6 +11,7 @@ char SGN_Z_D(const big_Z& z) {
     return -1;
 }
 
+
 big_Z DIV_ZZ_Z(const big_Z& x, const big_Z& y) {
     if (SGN_Z_D(y) == 0)
         return big_Z();
@@ -23,12 +24,7 @@ big_Z DIV_ZZ_Z(const big_Z& x, const big_Z& y) {
     big_N quotinent = DIV_NN_N(TRANS_Z_N(abs_x), TRANS_Z_N(abs_y));
 
     big_Z res;
-    if (SGN_Z_D(x) == SGN_Z_D(y))
-        res.sign = 1;
-    else {
-        quotinent = ADD_1N_N(quotinent);
-        res.sign = 0;
-    }
+    res.sign = SGN_Z_D(x) * SGN_Z_D(y);
     res.digits = quotinent.digits;
     return res;
 }
