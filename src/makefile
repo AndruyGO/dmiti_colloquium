@@ -2,7 +2,7 @@ CXX = g++
 CXXFLAGS = -std=c++17
 
 TARGET = prog
-OBJECTS = obj/main.o obj/Module_1/*.o obj/Module_2/*.o
+OBJECTS = obj/main.o obj/Module_1/*.o obj/Module_2/*.o obj/Module_3/*.o
 
 all:
 	$(CXX) $(CXXFLAGS) -c main.cpp
@@ -11,6 +11,8 @@ all:
 	mv *.o obj/Module_1/
 	$(CXX) $(CXXFLAGS) -c Module_2/*.cpp
 	mv *.o obj/Module_2/
+	$(CXX) $(CXXFLAGS) -c Module_3/*.cpp
+	mv *.o obj/Module_3/
 	$(CXX) $(OBJECTS) -o $(TARGET)
 
 clean:

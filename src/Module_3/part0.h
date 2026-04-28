@@ -18,6 +18,10 @@ class big_Q{
     friend ostream& operator<<(ostream& os, const big_Q& obj);
 
     big_Q(){}
+    
+    big_Q(char _sign, const big_N &_up, const big_N &_down){
+        sign = _sign; up = _up; down = _down;
+    }
 
     big_Q(const string &_digits){
         // Ищем разделитель '/'
