@@ -1,7 +1,4 @@
-#include "part0.h"
-#include "part2.h"
-#include "part3.h"
-#include "part4.h"
+#include "integer.h"
 #include "../Module_1/part1.h"
 #include "../Module_1/part3.h"
 #include "../Module_1/part4.h"

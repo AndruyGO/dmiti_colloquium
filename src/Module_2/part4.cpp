@@ -1,12 +1,13 @@
 #include "../Module_1/part0.h"
+#include "../Module_1/part2.h"
 #include "part0.h"
 #include "part1.h"
-#include "../Module_1/part2.h"
 
 big_Z MUL_ZM_Z (big_Z z){
     z.sign = (z.sign == 1) ? -1 : 1;
     return z;
 }
+
 big_Z MUL_ZZ_Z(const big_Z& z1,const big_Z& z2){
     big_Z res;
     if (SGN_Z_D(z1) == 0 || SGN_Z_D(z2) == 0){

@@ -1,9 +1,5 @@
-#include "part0.h"
-#include "../Module_1/part0.h"
-#include "../Module_1/part1.h"
-#include "../Module_1/part3.h"
-#include "../Module_1/part4.h"
-
+#include "../Module_1/natural.h"
+#include "integer.h"
 
 big_Z TRANS_N_Z(const big_N &n) {
     // Перевод натурального числа в целое
