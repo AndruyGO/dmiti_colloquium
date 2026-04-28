@@ -30,7 +30,7 @@ class big_Z{
         int start;
         unsigned long size = _digits.size();
         if(_digits[0] == '-'){
-            sign = 0;
+            sign = -1;
             start = 1;
             size--;
         }else if(_digits[0] == '+'){

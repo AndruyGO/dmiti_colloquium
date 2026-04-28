@@ -9,7 +9,8 @@ char NZER_Z_B(const big_Z &n){
 
 ostream& operator << (ostream& os, const big_Z& n) {
     unsigned long size = n.digits.size();
-    if(ALWAYS_PRINT_SIGN && n.sign == 1 && NZER_Z_B(n)) os << '+';
+    if((ALWAYS_PRINT_SIGN && n.sign == 1 && NZER_Z_B(n))) os << '+';
+    if(n.sign == -1) os << '-';
     for (int i = 0; i < size; i++) {
         os << (int) n.digits[size-1-i];
     }
