@@ -1,0 +1,5 @@
+#pragma once
+#include "part0.h"
+
+big_Q ADD_QQ_Q(const big_Q& q1,const big_Q& q2); 
+big_Z SUB_QQ_Q(const big_Q& q1,const big_Q& q2); 
