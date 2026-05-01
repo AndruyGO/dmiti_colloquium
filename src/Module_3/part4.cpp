@@ -24,12 +24,13 @@ big_Q ADD_QQ_Q(const big_Q& q1,const big_Q& q2){
    big_Z abs_sum = ABS_Z_Z(sum);
    res.up = TRANS_Z_N(abs_sum);
 
-if (res.up.digits.empty() || res.up.digits[0] == 0) {
-   res.sign = 0;
+   if (!NZER_N_B(res.up)) {
+      res.sign = 0;
+      return res;
+   }
    return res;
 }
-return res;
-}
+
 big_Q SUB_QQ_Q(const big_Q& q1,const big_Q& q2){
    big_Q new_q2 = q2;
    new_q2.sign = new_q2.sign * (-1);
