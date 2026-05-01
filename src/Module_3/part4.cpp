@@ -19,8 +19,15 @@ big_Q ADD_QQ_Q(const big_Q& q1,const big_Q& q2){
    new_q2 = TRANS_N_Z(DIV_NN_N(MUL_NN_N(q2.up,NOK),q2.down));
    new_q1.sign = q1.sign;
    new_q2.sign = q2.sign;
-   res.sign = ADD_ZZ_Z(new_q1,new_q2).sign;
-   res.up = TRANS_Z_N(ADD_ZZ_Z(new_q1,new_q2));
+   big_Z sum = ADD_ZZ_Z(new_q1, new_q2);
+   res.sign = sum.sign;
+   big_Z abs_sum = ABS_Z_Z(sum);
+   res.up = TRANS_Z_N(abs_sum);
+
+if (res.up.digits.empty() || res.up.digits[0] == 0) {
+    res.sign = 0;
+    return RED_Q_Q(res);
+}
    return RED_Q_Q(res);
 }
 big_Q SUB_QQ_Q(const big_Q& q1,const big_Q& q2){
