@@ -39,7 +39,7 @@ $(OBJDIR)/%.o: %.cpp
 	@mkdir -p $(@D)
 	$(CXX) $(CXXFLAGS) -c $< -MMD -o $@
 
-.PHONY: all clean
+.PHONY: all check clean
 
 clean:
 	-rm -rv $(BUILD)/*
