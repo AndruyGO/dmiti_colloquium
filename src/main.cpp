@@ -1,4 +1,6 @@
+#include "Module_1/natural.h"
 #include "Module_2/integer.h"
+#include "Module_3/rational.h"
 #include <iostream>
 #include <string>
 
@@ -8,52 +10,44 @@ int main() {
     int choice;
     string s1, s2;
     
-    cout << "\n1-ABS 2-SGN 3-MUL_ZM 4-N->Z 5-Z->N 6-ADD 7-SUB 8-MUL 9-DIV 10-MOD 0-EXIT: ";
     while (1) {
+        cout << "\n1-RED 2-INT 3-Z->Q 4-Q->Z 5-ADD 6-SUB 7-MUL 8-DIV 0-EXIT: ";
         cin >> choice;
         
         if (choice == 0) break;
         
         switch (choice) {
-            case 1:
+            case 1: // RED_Q_Q - сокращение
                 cin >> s1;
-                cout << ABS_Z_Z(big_Z(s1)) << endl;
+                cout << RED_Q_Q(big_Q(s1)) << endl;
                 break;
-            case 2:
+            case 2: // INT_Q_B - проверка на целое (1 - да, 0 - нет)
                 cin >> s1;
-                cout << (int)SGN_Z_D(big_Z(s1)) << endl;
+                cout << (int)INT_Q_B(big_Q(s1)) << endl;
                 break;
-            case 3:
+            case 3: // TRANS_Z_Q - целое -> дробь
                 cin >> s1;
-                cout << MUL_ZM_Z(big_Z(s1)) << endl;
+                cout << TRANS_Z_Q(big_Z(s1)) << endl;
                 break;
-            case 4:
+            case 4: // TRANS_Q_Z - дробь -> целое (если знаменатель 1)
                 cin >> s1;
-                cout << TRANS_N_Z(big_N(s1)) << endl;
+                cout << TRANS_Q_Z(big_Q(s1)) << endl;
                 break;
-            case 5:
-                cin >> s1;
-                cout << TRANS_Z_N(big_Z(s1)) << endl;
-                break;
-            case 6:
+            case 5: // ADD_QQ_Q - сложение
                 cin >> s1 >> s2;
-                cout << ADD_ZZ_Z(big_Z(s1), big_Z(s2)) << endl;
+                cout << ADD_QQ_Q(big_Q(s1), big_Q(s2)) << endl;
                 break;
-            case 7:
+            case 6: // SUB_QQ_Q - вычитание
                 cin >> s1 >> s2;
-                cout << SUB_ZZ_Z(big_Z(s1), big_Z(s2)) << endl;
+                cout << SUB_QQ_Q(big_Q(s1), big_Q(s2)).up << " " << SUB_QQ_Q(big_Q(s1), big_Q(s2)).down << endl;
                 break;
-            case 8:
+            case 7: // MUL_QQ_Q - умножение
                 cin >> s1 >> s2;
-                cout << MUL_ZZ_Z(big_Z(s1), big_Z(s2)) << endl;
+                cout << MUL_QQ_Q(big_Q(s1), big_Q(s2)) << endl;
                 break;
-            case 9:
+            case 8: // DIV_QQ_Q - деление
                 cin >> s1 >> s2;
-                cout << DIV_ZZ_Z(big_Z(s1), big_Z(s2)) << endl;
-                break;
-            case 10:
-                cin >> s1 >> s2;
-                cout << MOD_ZZ_Z(big_Z(s1), big_Z(s2)) << endl;
+                cout << DIV_QQ_Q(big_Q(s1), big_Q(s2)) << endl;
                 break;
         }
     }
