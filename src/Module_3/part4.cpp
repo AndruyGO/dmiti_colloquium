@@ -25,13 +25,13 @@ big_Q ADD_QQ_Q(const big_Q& q1,const big_Q& q2){
    res.up = TRANS_Z_N(abs_sum);
 
 if (res.up.digits.empty() || res.up.digits[0] == 0) {
-    res.sign = 0;
-    return RED_Q_Q(res);
+   res.sign = 0;
+   return res;
 }
-   return RED_Q_Q(res);
+return res;
 }
 big_Q SUB_QQ_Q(const big_Q& q1,const big_Q& q2){
    big_Q new_q2 = q2;
-   new_q2.sign = (q2.sign == 1) ? -1 : (q2.sign == -1) ? 1 : 0;
+   new_q2.sign = new_q2.sign * (-1);
    return ADD_QQ_Q(q1,new_q2);
 }
