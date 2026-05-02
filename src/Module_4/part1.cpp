@@ -3,7 +3,7 @@
 #include "../Module_2/integer.h"
 #include "../Module_3/rational.h"
 
-big_P iterate_over_monoms(const big_P& p, const big_P& q,
+big_P iterate_over_monomials(const big_P& p, const big_P& q,
                           big_Q (*linear_op)(const big_Q&, const big_Q&)) {
     big_P res;
 
@@ -14,8 +14,8 @@ big_P iterate_over_monoms(const big_P& p, const big_P& q,
     while (p_it != p.monomials.end() && q_it != q.monomials.end()) {
         char comp = COM_NN_D((*p_it).degree, (*q_it).degree);
         if (comp == 0) {
-            // Если степени равны, создаем моном с такой же степенью и суммой/разностью
-            // коэффицентов и продвигаем оба итератора
+            // Если степени равны, создаем моном с такой же степенью и
+            // суммой/разностью коэффицентов и продвигаем оба итератора
             big_Q addition = linear_op((*p_it++).val, (*q_it++).val);
 
             // Если результат не ноль добавляем
@@ -23,10 +23,10 @@ big_P iterate_over_monoms(const big_P& p, const big_P& q,
                 monomial mn {(*p_it).degree, addition};
                 res.monomials.push_back(mn);
             }
-        } else if (comp == 2) {
-            // Если степень первого больше добавляем его
-            res.monomials.push_back((*p_it++));
         } else if (comp == 1) {
+            // Если степень первого меньше добавляем его
+            res.monomials.push_back((*p_it++));
+        } else if (comp == 2) {
             // Иначе добавляем другой
             res.monomials.push_back((*q_it++));
         }
@@ -42,11 +42,11 @@ big_P iterate_over_monoms(const big_P& p, const big_P& q,
 }
 
 big_P ADD_PP_P(const big_P& p, const big_P& q) {
-    big_P res = iterate_over_monoms(p, q, ADD_QQ_Q);
+    big_P res = iterate_over_monomials(p, q, ADD_QQ_Q);
     return res;
 }
 
 big_P SUB_PP_P(const big_P& p, const big_P& q) {
-    big_P res = iterate_over_monoms(p, q, SUB_QQ_Q);
+    big_P res = iterate_over_monomials(p, q, SUB_QQ_Q);
     return res;
 }
