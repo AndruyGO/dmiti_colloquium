@@ -9,6 +9,10 @@
 
 using namespace std;
 
+
+extern bool ALWAYS_PRINT_DENOMINATOR;
+
+
 class big_Q{
     public:
     char sign;
