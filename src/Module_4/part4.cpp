@@ -16,7 +16,5 @@ big_P DER_P_P(const big_P& p){
          res.monomials[i].degree = SUB_NN_N(res.monomials[i].degree,big_N("1"));
       }
       }
-   sort(res.monomials.begin(), res.monomials.end());
-   res.combine_monoms();
    return res;
 }
