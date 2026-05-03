@@ -16,11 +16,11 @@ big_P iterate_over_monomials(const big_P& p, const big_P& q,
         if (comp == 0) {
             // Если степени равны, создаем моном с такой же степенью и
             // суммой/разностью коэффицентов и продвигаем оба итератора
-            big_Q addition = linear_op((*p_it++).val, (*q_it++).val);
+            big_Q addition = linear_op((*p_it).val, (*q_it++).val);
 
             // Если результат не ноль добавляем
             if (NZER_N_B(addition.up)) {
-                monomial mn {(*p_it).degree, addition};
+                monomial mn {(*p_it++).degree, addition};
                 res.monomials.push_back(mn);
             }
         } else if (comp == 1) {
