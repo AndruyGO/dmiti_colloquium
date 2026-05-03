@@ -4,7 +4,7 @@
 #include "part0.h"
 
 ostream& operator<<(ostream& os, const big_P& p) {
-    if (p.monomials.empty() || (p.monomials.size() == 1 && p.monomials[0].val.up.digits[0] == 0)) {
+    if (p.monomials.empty() || (p.monomials.size() == 1 && p.monomials[0].val.up.digits[0] == 0 && p.monomials[0].val.up.digits.size() == 1)) {
         os << "0";
         return os;
     }

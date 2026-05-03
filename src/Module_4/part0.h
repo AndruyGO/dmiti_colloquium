@@ -22,6 +22,7 @@ struct monomial {
     big_Q val;
     
     monomial() {}
+    monomial(const big_N &_degree, const big_Q &_val) {degree = _degree; val = _val;}
     monomial(const big_N& d, const big_Q& v) : degree(d), val(v) {}
     const bool operator < (const monomial &other) const {
         signed char a = COM_NN_D(degree, other.degree);
