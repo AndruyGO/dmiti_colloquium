@@ -3,10 +3,14 @@
 #include "../Module_2/integer.h"
 #include "../Module_3/rational.h"
 
-big_P iterate_over_monomials(const big_P& p, const big_P& q,
+big_P iterate_over_monomials(big_P p, big_P q,
                           big_Q (*linear_op)(const big_Q&, const big_Q&)) {
+    
     big_P res;
-
+    
+    sort(p.monomials.begin(), p.monomials.end());
+    sort(q.monomials.begin(), q.monomials.end());
+    
     auto p_it = p.monomials.begin();
     auto q_it = q.monomials.begin();
 
