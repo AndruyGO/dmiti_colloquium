@@ -28,11 +28,12 @@ big_Q ADD_QQ_Q(const big_Q& q1,const big_Q& q2){
       res.sign = 0;
       return res;
    }
-   return res;
+   if(ALWAYS_REDUCE) return RED_Q_Q(res); else return res;
 }
 
 big_Q SUB_QQ_Q(const big_Q& q1,const big_Q& q2){
    big_Q new_q2 = q2;
    new_q2.sign = new_q2.sign * (-1);
-   return ADD_QQ_Q(q1,new_q2);
+   if(ALWAYS_REDUCE) return RED_Q_Q(ADD_QQ_Q(q1,new_q2)); else return ADD_QQ_Q(q1,new_q2);
+   
 }

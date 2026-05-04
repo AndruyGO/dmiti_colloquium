@@ -34,3 +34,17 @@ ostream& operator<<(ostream& os, const big_P& p) {
     ALWAYS_PRINT_SIGN = prew_presset;
     return os;
 }
+
+big_P DIV_PQ_P (big_P p, const big_Q &div){
+    for (size_t i = 0; i < p.monomials.size(); i++) {
+        p.monomials[i].val = DIV_QQ_Q(p.monomials[i].val, div);
+    }
+    return p;
+}
+
+big_P MUL_PQ_P (big_P p, const big_Q &div){
+    for (size_t i = 0; i < p.monomials.size(); i++) {
+        p.monomials[i].val = MUL_QQ_Q(p.monomials[i].val, div);
+    }
+    return p;
+}

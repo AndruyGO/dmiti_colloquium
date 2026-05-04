@@ -11,7 +11,7 @@ using namespace std;
 
 
 extern bool ALWAYS_PRINT_DENOMINATOR;
-
+extern bool ALWAYS_REDUCE;
 
 class big_Q{
     public:

@@ -131,3 +131,5 @@ private:
 };
 
 ostream& operator<<(ostream& os, const big_P& p);
+big_P DIV_PQ_P(big_P p, const big_Q &div);
+big_P MUL_PQ_P(big_P p, const big_Q &div);
