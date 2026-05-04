@@ -25,7 +25,7 @@ big_Q FAC_P_Q(const big_P &p) {
     return div;
 }
 
-big_P DIVQ_PQ_P (big_P p, const big_Q &div){
+big_P DIV_PQ_P (big_P p, const big_Q &div){
     for (size_t i = 0; i < p.monomials.size(); i++) {
         p.monomials[i].val = DIV_QQ_Q(p.monomials[i].val, div);
     }
