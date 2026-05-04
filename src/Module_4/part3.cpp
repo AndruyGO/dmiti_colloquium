@@ -3,14 +3,19 @@
 #include "../Module_1/natural.h"
 #include "../Module_2/integer.h"
 #include "../Module_3/rational.h"
+#include <algorithm>
 
 big_N DEG_P_N(const big_P& p) {
     if (p.monomials.empty()) {
         return big_N("0");
     }
-    return p.monomials[0].degree;
+    monomial m = *max_element(p.monomials.begin(), p.monomials.end());
+    return m.degree;
 }
 
+big_Q LED_P_Q(const big_P &p) {
+    
+}
 big_Q FAC_P_Q(const big_P &p) {
     if (p.monomials.empty()) {
         return big_Q("0");
