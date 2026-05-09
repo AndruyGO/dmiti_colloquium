@@ -1,7 +1,8 @@
 #include "part0.h"
+#include "part2.h"
+#include "part3.h"
 #include "../Module_1/part3.h"
 #include "../Module_1/part2.h"
-
 
 big_P DER_P_P(const big_P& p){
    big_P res = p;
@@ -17,4 +18,28 @@ big_P DER_P_P(const big_P& p){
       }
       }
    return res;
+}
+big_P GCF_PP_P (const big_P& p1,const big_P& p2){
+   big_P new_p1 = p1;
+   big_P new_p2 = p2;
+   while (new_p1.monomials.size() != 0 && new_p2.monomials.size() != 0){
+      if (DEG_P_N(new_p1)>DEG_P_N(new_p2)){
+         new_p1 = MOD_PP_P(new_p1,new_p2);
+      }
+      else{
+         new_p2 = MOD_PP_P(new_p2,new_p1);
+      }
+   }
+   if (new_p1.monomials.size() == 0){
+      return new_p2;
+   }
+   else{
+      return new_p1;
+   }
+}
+big_P NMR_P_P(const big_P& p){
+   big_P der = DER_P_P(p);
+   if (der.monomials.empty()) return p;
+   big_P NOD = GCF_PP_P(p, der);
+   return DIV_PP_P(p, NOD);
 }
