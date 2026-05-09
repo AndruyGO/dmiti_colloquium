@@ -2,10 +2,12 @@
 #include "ast.h"
 #include "token.h"
 
+#include <initializer_list>
 #include <memory>
 #include <optional>
 #include <stdexcept>
 #include <string>
+#include <string_view>
 #include <utility>
 #include <vector>
 
@@ -26,6 +28,17 @@ bool Parser::check(TokenType type) const {
     return !is_at_end() && peek().type == type;
 }
 
+bool Parser::check(
+    TokenType type, std::initializer_list<std::string_view> lexemes) const {
+    if (is_at_end() || peek().type != type)
+        return false;
+    for (auto lexeme : lexemes) {
+        if (peek().lexeme == lexeme)
+            return true;
+    }
+    return false;
+}
+
 std::optional<Token> Parser::match(TokenType type) {
     if (check(type)) {
         return advance();
@@ -33,10 +46,17 @@ std::optional<Token> Parser::match(TokenType type) {
     return std::nullopt;
 }
 
+std::optional<Token> Parser::match(
+    TokenType type, std::initializer_list<std::string_view> lexemes) {
+    if (check(type, lexemes)) {
+        return advance();
+    }
+    return std::nullopt;
+}
+
 Expression Parser::parse_term() {
     Expression expr = parse_factor();
-    while (match(TokenType::Operator) &&
-           (peek().lexeme == "*" || peek().lexeme == "/")) {
+    while (auto t_op = match(TokenType::Operator, {"*", "%"})) {
         std::string op {tokens[current - 1].lexeme.data(),
             tokens[current - 1].lexeme.size()};
         Expression right = parse_factor();
@@ -88,10 +108,8 @@ Block Parser::parse_block() {
 
 Expression Parser::parse_expression() {
     Expression expr = parse_term();
-    while (match(TokenType::Operator) &&
-           (peek().lexeme == "+" || peek().lexeme == "-")) {
-        std::string op {tokens[current - 1].lexeme.data(),
-            tokens[current - 1].lexeme.size()};
+    while (auto t_op = match(TokenType::Operator, {"+", "-"})) {
+        std::string op {t_op.value().lexeme.data(), t_op.value().lexeme.size()};
         Expression right = parse_term();
         expr = BinaryOp {op, std::make_unique<Expression>(std::move(expr)),
             std::make_unique<Expression>(std::move(right))};

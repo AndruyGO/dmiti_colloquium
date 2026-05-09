@@ -20,8 +20,11 @@ class Parser {
     Token advance();
     bool is_at_end() const;
     bool check(TokenType type) const;
+    bool check(
+        TokenType type, std::initializer_list<std::string_view> lexemes) const;
     std::optional<Token> match(TokenType type);
-    std::optional<Token> match(TokenType type, std::string_view lexeme);
+    std::optional<Token> match(
+        TokenType type, std::initializer_list<std::string_view> lexemes);
 
     Statement parse_statement();
     Expression parse_expression();
