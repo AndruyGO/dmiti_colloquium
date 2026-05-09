@@ -16,6 +16,7 @@ void start_repl() {
         try {
             Lexer lexer(line);
             const std::vector<Token> tokens = lexer.tokenize();
+
             for (const auto& token : tokens) {
                 std::cout << token << "\n";
             }
