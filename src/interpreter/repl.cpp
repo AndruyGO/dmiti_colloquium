@@ -26,9 +26,9 @@ void start_repl() {
             for (const auto& stmt : stmts) {
                 print_statement(stmt);
             }
-            std::cout << "\n>>> ";
         } catch (const std::exception& e) {
             std::cerr << "Error: " << e.what() << "\n";
         }
+        std::cout << "\n>>> ";
     }
 }

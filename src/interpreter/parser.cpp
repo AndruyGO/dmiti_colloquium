@@ -37,22 +37,25 @@ Expression Parser::parse_term() {
     Expression expr = parse_factor();
     while (match(TokenType::Operator) &&
            (peek().lexeme == "*" || peek().lexeme == "/")) {
-        std::string op {tokens[current - 1].lexeme};
+        std::string op {tokens[current - 1].lexeme.data(),
+            tokens[current - 1].lexeme.size()};
         Expression right = parse_factor();
         expr = BinaryOp {op, std::make_unique<Expression>(std::move(expr)),
-                         std::make_unique<Expression>(std::move(right))};
+            std::make_unique<Expression>(std::move(right))};
     }
     return expr;
 }
 
 Expression Parser::parse_factor() {
     if (auto t_name = match(TokenType::Number)) {
-        big_Z val {t_name.value().lexeme.data()};
+        big_Z val {std::string {
+            t_name.value().lexeme.data(), t_name.value().lexeme.size()}};
         return Number {val};
     }
 
     if (auto t_id = match(TokenType::Identifier)) {
-        return Variable {std::string {t_id.value().lexeme}};
+        return Variable {std::string {
+            t_id.value().lexeme.data(), t_id.value().lexeme.size()}};
     }
 
     if (match(TokenType::LeftParen)) {
@@ -62,8 +65,7 @@ Expression Parser::parse_factor() {
         return expr;
     }
     throw std::runtime_error("Unexpected token in factor, line " +
-                             std::to_string(peek().line) +
-                             " column " +
+                             std::to_string(peek().line) + " column " +
                              std::to_string(peek().column));
 }
 
@@ -88,10 +90,11 @@ Expression Parser::parse_expression() {
     Expression expr = parse_term();
     while (match(TokenType::Operator) &&
            (peek().lexeme == "+" || peek().lexeme == "-")) {
-        std::string op {tokens[current - 1].lexeme};
+        std::string op {tokens[current - 1].lexeme.data(),
+            tokens[current - 1].lexeme.size()};
         Expression right = parse_term();
         expr = BinaryOp {op, std::make_unique<Expression>(std::move(expr)),
-                         std::make_unique<Expression>(std::move(right))};
+            std::make_unique<Expression>(std::move(right))};
     }
     return expr;
 }
@@ -104,24 +107,21 @@ Statement Parser::parse_statement() {
 
     else if (auto t_type = match(TokenType::Type)) {
         if (auto t_name = match(TokenType::Identifier)) {
-            std::string name = std::string(t_name.value().lexeme);
+            std::string name = std::string {
+                t_name.value().lexeme.data(), t_name.value().lexeme.size()};
             if (match(TokenType::Assign)) {
                 Expression value = parse_expression();
                 if ((*t_type).lexeme == "N")
-                    return Assignment {
-                        name, Type::Nat,
+                    return Assignment {name, Type::Nat,
                         std::make_unique<Expression>(std::move(value))};
                 if ((*t_type).lexeme == "Z")
-                    return Assignment {
-                        name, Type::Int,
+                    return Assignment {name, Type::Int,
                         std::make_unique<Expression>(std::move(value))};
                 if ((*t_type).lexeme == "Q")
-                    return Assignment {
-                        name, Type::Rat,
+                    return Assignment {name, Type::Rat,
                         std::make_unique<Expression>(std::move(value))};
                 if ((*t_type).lexeme == "P")
-                    return Assignment {
-                        name, Type::Poly,
+                    return Assignment {name, Type::Poly,
                         std::make_unique<Expression>(std::move(value))};
             } else
                 throw std::runtime_error("Expected '=' after variable name");
@@ -132,18 +132,19 @@ Statement Parser::parse_statement() {
     else if (match(TokenType::KeywordIf)) {
         Expression cond = parse_expression();
         Block body = parse_block();
-        return If {std::make_unique<Expression>(std::move(cond)), std::move(body)};
+        return If {
+            std::make_unique<Expression>(std::move(cond)), std::move(body)};
     }
 
     else if (match(TokenType::KeywordWhile)) {
         Expression cond = parse_expression();
         Block body = parse_block();
-        return While {std::make_unique<Expression>(std::move(cond)), std::move(body)};
+        return While {
+            std::make_unique<Expression>(std::move(cond)), std::move(body)};
     }
 
     Expression expr = parse_expression();
-    return Assignment {
-        "_", Type::Infer,
+    return Assignment {"_", Type::Infer,
         std::make_unique<Expression>(std::move(expr))}; // Anonymous expression
 }
 
