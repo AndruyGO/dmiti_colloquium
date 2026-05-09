@@ -203,5 +203,14 @@ int main() {
     test_nmr();
     
     cout << "========== ALL TESTS COMPLETED ==========\n";
+    ALWAYS_PRINT_DENOMINATOR = 0;
+    while (1)
+    {
+        string str;
+        cin >> str;
+        cout << big_P(str) << endl;
+    }
+    
+    start_repl();
     return 0;
 }
