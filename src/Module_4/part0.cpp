@@ -3,6 +3,13 @@
 #include "../Module_3/rational.h"
 #include "part0.h"
 
+char NZER_P_B(const big_P &p){
+    if((p.monomials.size() == 1 && p.monomials[0].val.up.digits[0] == 0 && p.monomials[0].val.up.digits.size() == 1)){
+        return 0;
+    }else{
+        return 1;
+    }
+}
 ostream& operator<<(ostream& os, const big_P& p) {
     if (p.monomials.empty() || (p.monomials.size() == 1 && p.monomials[0].val.up.digits[0] == 0 && p.monomials[0].val.up.digits.size() == 1)) {
         os << "0";
@@ -38,13 +45,6 @@ ostream& operator<<(ostream& os, const big_P& p) {
 big_P DIV_PQ_P (big_P p, const big_Q &div){
     for (size_t i = 0; i < p.monomials.size(); i++) {
         p.monomials[i].val = DIV_QQ_Q(p.monomials[i].val, div);
-    }
-    return p;
-}
-
-big_P MUL_PQ_P (big_P p, const big_Q &div){
-    for (size_t i = 0; i < p.monomials.size(); i++) {
-        p.monomials[i].val = MUL_QQ_Q(p.monomials[i].val, div);
     }
     return p;
 }

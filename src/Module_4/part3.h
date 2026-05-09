@@ -1,3 +1,4 @@
+#pragma oncde
 #include "part0.h"
 
 big_P MUL_Pxk_P(const big_P& p, const big_N& k);
