@@ -1,3 +1,4 @@
+#pragma once
 #include "part0.h"
 
 big_Q MUL_QQ_Q(const big_Q& x, const big_Q& y);

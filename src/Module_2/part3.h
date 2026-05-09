@@ -1,3 +1,4 @@
+#pragma once
 #include "part0.h"
 
 big_Z ABS_Z_Z (const big_Z& x);

@@ -11,7 +11,7 @@ char SGN_Z_D(const big_Z& z) {
     return -1;
 }
 
-
+/* Говно
 big_Z DIV_ZZ_Z(const big_Z& x, const big_Z& y) {
     if (SGN_Z_D(y) == 0)
         return big_Z();
@@ -28,3 +28,4 @@ big_Z DIV_ZZ_Z(const big_Z& x, const big_Z& y) {
     res.digits = quotinent.digits;
     return res;
 }
+*/

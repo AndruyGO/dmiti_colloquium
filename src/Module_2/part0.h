@@ -41,7 +41,7 @@ class big_Z{
             sign = 1;
             start = 0;
         }
-        digits.resize(size);
+        digits.resize(size); 
         for (int i=start; i < size+start; i++) {
             digits[size-1-i+start] = _digits[i] - '0';
         }

@@ -7,7 +7,7 @@
 #include "../Module_2/part3.h"
 #include "../Module_2/part4.h"
 
-big_Q ADD_QQ_Q(const big_Q& q1,const big_Q& q2){
+big_Q ADD_QQ_Q(const big_Q& q1, const big_Q& q2){
    if (q1.sign == 0) return q2;
    if (q2.sign == 0) return q1;
    big_Q res;

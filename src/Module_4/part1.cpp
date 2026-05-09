@@ -4,8 +4,7 @@
 #include "../Module_2/integer.h"
 #include "../Module_3/rational.h"
 
-big_P iterate_over_monomials(big_P p, big_P q,
-                          big_Q (*linear_op)(const big_Q&, const big_Q&)) {
+big_P ADD_PP_P(big_P p, big_P q) {
     
     big_P res;
     
@@ -14,12 +13,12 @@ big_P iterate_over_monomials(big_P p, big_P q,
     
     auto p_it = p.monomials.begin();
     auto q_it = q.monomials.begin();
-
+    
     // Итерируем по мономам многочленов
     while (p_it != p.monomials.end() && q_it != q.monomials.end()) {
         char comp = COM_NN_D((*p_it).degree, (*q_it).degree);
         if (comp == 0) {
-            big_Q addition = linear_op((*p_it).val, (*q_it).val);
+            big_Q addition = ADD_QQ_Q((*p_it).val, (*q_it).val);
             if (NZER_N_B(addition.up)) {
                 monomial mn {(*p_it).degree, addition};
                 res.monomials.push_back(mn);
@@ -44,12 +43,7 @@ big_P iterate_over_monomials(big_P p, big_P q,
     return res;
 }
 
-big_P ADD_PP_P(const big_P& p, const big_P& q) {
-    big_P res = iterate_over_monomials(p, q, ADD_QQ_Q);
-    return res;
-}
-
 big_P SUB_PP_P(const big_P& p, const big_P& q) {
-    big_P res = iterate_over_monomials(p, MUL_PQ_P(q, big_Q("-1")), ADD_QQ_Q);
-    return res;
+    big_P temp = MUL_PQ_P(q, big_Q("-1"));
+    return ADD_PP_P(p, temp);
 }

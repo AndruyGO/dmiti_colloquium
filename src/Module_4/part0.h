@@ -15,8 +15,6 @@
 
 using namespace std;
 
-// ... предыдущий код big_Z, big_Q ...
-
 struct monomial {
     big_N degree;
     big_Q val;

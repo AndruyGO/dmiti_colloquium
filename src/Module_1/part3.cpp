@@ -39,7 +39,6 @@ big_N SUB_NN_N(const big_N& x, const big_N& y) {
             res += 10;
             tmp = 1;
         }
-        else
             tmp = 0;
         result.digits[i] = res;
     }
