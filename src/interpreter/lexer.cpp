@@ -44,7 +44,7 @@ Token Lexer::read_number() {
 
 Token Lexer::read_identifier_or_keyword() {
     size_t id_start = current;
-    while (isalnum(peek()) || peek() == '_')
+    while (isalnum(peek()) || peek() == '_' || peek() == '^')
         advance();
 
     auto text = source.substr(id_start, current - id_start);

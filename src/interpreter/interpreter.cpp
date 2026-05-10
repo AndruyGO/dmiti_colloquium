@@ -6,6 +6,8 @@
 #include "interpreter.h"
 #include "ast.h"
 
+#include <algorithm>
+#include <cctype>
 #include <stdexcept>
 #include <variant>
 
@@ -27,6 +29,10 @@ Result Interpreter::evaluate_expression(const Expression& expr) {
     {
         [](const Number& n) -> Result { return n.value; },
         [&](const Variable& v) -> Result {
+            if (v.name.starts_with("x^") && std::all_of(v.name.begin()+2, v.name.end(), ::isdigit)) {
+                return  big_P {v.name};
+            }
+            
             if (context_nats.contains(v.name))
                 return context_nats[v.name];
             if (context_ints.contains(v.name))
