@@ -51,7 +51,7 @@ Result Interpreter::evaluate_expression(const Expression& expr) {
             {
                 [&](const big_N& n) -> Result {
                     if (c.name == "SIGN")
-                        return big_N{"1"}; 
+                        return big_N{"1"};
                     if (c.name == "DEG")
                         return big_N{"0"};
                     if (c.name == "DER")
@@ -64,8 +64,15 @@ Result Interpreter::evaluate_expression(const Expression& expr) {
                     throw std::runtime_error("Unknown function " + c.name);
                 },
                 [&](const big_Z& z) -> Result {
-                    if (c.name == "SIGN")
-                        return big_Z {std::string{SGN_Z_D(z)}}; 
+                    if (c.name == "SIGN") {
+                        char res = SGN_Z_D(z);
+                        if (res == 1)
+                            return big_Z {"1"}; 
+                        if (res == 0)
+                            return big_Z {"0"}; 
+                        if (res == -1)
+                            return big_Z {"-1"}; 
+                    }
                     if (c.name == "DEG")
                         return big_N{"0"};
                     if (c.name == "DER")
