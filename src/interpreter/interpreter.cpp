@@ -45,6 +45,73 @@ Result Interpreter::evaluate_expression(const Expression& expr) {
             throw std::runtime_error("Variable " + v.name + " not found");
         },
 
+        [&](const FuncCall& c) -> Result {
+            Result value = evaluate_expression(*c.argument);
+            return std::visit(overloaded
+            {
+                [&](const big_N& n) -> Result {
+                    if (c.name == "SIGN")
+                        return big_N{"1"}; 
+                    if (c.name == "DEG")
+                        return big_N{"0"};
+                    if (c.name == "DER")
+                        return big_N{"0"};
+                    if (c.name == "NMR") {
+                        big_P p {};
+                        p.monomials.push_back(monomial(big_N("0"), TRANS_Z_Q(TRANS_N_Z(n))));                        
+                        return NMR_P_P(p);
+                    }
+                    throw std::runtime_error("Unknown function " + c.name);
+                },
+                [&](const big_Z& z) -> Result {
+                    if (c.name == "SIGN")
+                        return big_Z {std::string{SGN_Z_D(z)}}; 
+                    if (c.name == "DEG")
+                        return big_N{"0"};
+                    if (c.name == "DER")
+                        return big_N{"0"};
+                    if (c.name == "NMR") {
+                        big_P p {};
+                        p.monomials.push_back(monomial(big_N("0"), TRANS_Z_Q(z)));                        
+                        return NMR_P_P(p);
+                    }
+                    throw std::runtime_error("Unknown function " + c.name);
+                },
+                [&](const big_Q& q) -> Result {
+                    if (c.name == "SIGN") {
+                        if (!NZER_N_B(q.up))
+                            return big_Z {"0"};
+                        if (q.sign == 1)
+                            return big_Z {"1"};
+                        if (q.sign == -1)
+                            return big_Z {"-1"};
+                    }
+                    if (c.name == "DEG")
+                        return big_N{"0"};
+                    if (c.name == "DER")
+                        return big_N{"0"};
+                    if (c.name == "NMR") {
+                        big_P p {};
+                        p.monomials.push_back(monomial(big_N("0"), q));                        
+                        return NMR_P_P(p);
+                    }
+                    throw std::runtime_error("Unknown function " + c.name);
+                },
+                [&](const big_P& p) -> Result {
+                    if (c.name == "SIGN")
+                        throw std::runtime_error("SIGN is not allowed on polynomials");
+                    if (c.name == "DEG")
+                        return DEG_P_N(p);
+                    if (c.name == "DER")
+                        return DER_P_P(p);
+                    if (c.name == "NMR") {
+                        return NMR_P_P(p);
+                    }
+                    throw std::runtime_error("Unknown function " + c.name);
+                },
+            }, value);
+        },
+
 
         // literal insanity
         [&](const BinaryOp& op) -> Result {

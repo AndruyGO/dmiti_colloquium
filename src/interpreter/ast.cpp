@@ -62,6 +62,12 @@ void print_expression(const Expression& expr, int indent) {
                        print_expression(*ex.right, indent + 2);
                        std::cout << std::string(indent, ' ') << ")\n";
                    },
+                   [indent](const FuncCall& ex) {
+                       std::cout << std::string(indent, ' ') << "FuncCall("
+                                 << ex.name << ") {\n";
+                       print_expression(*ex.argument, indent + 2);
+                       std::cout << std::string(indent, ' ') << ")\n";
+                   },
                },
         expr);
 }

@@ -2,6 +2,7 @@
 #include "ast.h"
 #include "token.h"
 
+#include <algorithm>
 #include <initializer_list>
 #include <memory>
 #include <optional>
@@ -78,6 +79,13 @@ Expression Parser::parse_factor() {
             t_id.value().lexeme.data(), t_id.value().lexeme.size()}};
     }
 
+    if (auto t_call = match(TokenType::KeywordFunc)) {
+        Expression expr = parse_expression();
+        return FuncCall {std::string {t_call.value().lexeme.data(),
+                             t_call.value().lexeme.size()},
+            std::make_unique<Expression>(std::move(expr))};
+    }
+
     if (match(TokenType::LeftParen)) {
         Expression expr = parse_expression();
         if (!match(TokenType::RightParen))
@@ -126,7 +134,8 @@ Statement Parser::parse_statement() {
     else if (auto t_type = match(TokenType::Type)) {
         if (auto t_name = match(TokenType::Identifier)) {
             if (t_name.value().lexeme == "x")
-                throw std::runtime_error("Assingment of keyword 'x' is not allowed");
+                throw std::runtime_error(
+                    "Assingment of keyword 'x' is not allowed");
             std::string name = std::string {
                 t_name.value().lexeme.data(), t_name.value().lexeme.size()};
             if (match(TokenType::Assign)) {

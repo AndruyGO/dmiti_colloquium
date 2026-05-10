@@ -1,6 +1,7 @@
 #include "lexer.h"
 #include "token.h"
 
+#include <algorithm>
 #include <cctype>
 #include <cstddef>
 #include <string_view>
@@ -57,6 +58,8 @@ Token Lexer::read_identifier_or_keyword() {
         return Token {TokenType::KeywordWhile, text, line, column};
     if (text == "N" || text == "Z" || text == "Q" || text == "P")
         return Token {TokenType::Type, text, line, column};
+    if (std::all_of(text.begin(), text.end(), ::isupper))
+        return Token {TokenType::KeywordFunc, text, line, column};
 
     return Token {TokenType::Identifier, text, line, column};
 }

@@ -17,8 +17,9 @@ struct Print;
 struct Block;
 struct If;
 struct While;
+struct FuncCall;
 
-using Expression = std::variant<Number, Variable, BinaryOp>;
+using Expression = std::variant<Number, Variable, BinaryOp, FuncCall>;
 using Statement = std::variant<Assignment, Print, If, While, Block>;
 
 struct Number {
@@ -64,6 +65,11 @@ struct If {
 struct While {
     std::unique_ptr<Expression> condition;
     Block body;
+};
+
+struct FuncCall {
+    std::string name;
+    std::unique_ptr<Expression> argument;
 };
 
 void print_statement(const Statement& stmt, int indent = 0);

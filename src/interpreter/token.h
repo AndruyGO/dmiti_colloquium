@@ -12,6 +12,7 @@ enum class TokenType {
     KeywordPrint,
     KeywordIf,
     KeywordWhile,
+    KeywordFunc,
 
     Type,
 
