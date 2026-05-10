@@ -1,9 +1,35 @@
-#include "Module_1/natural.h"
-#include "Module_2/integer.h"
-#include "Module_3/rational.h"
-#include "Module_4/polynomial.h"
 #include <iostream>
 #include <string>
+// ========== МОДУЛЬ 1: НАТУРАЛЬНЫЕ ЧИСЛА (big_N) ==========
+#include "Module_1/part0.h"
+#include "Module_1/part1.h"
+#include "Module_1/part2.h"
+#include "Module_1/part3.h"
+#include "Module_1/part4.h"
+
+
+// ========== МОДУЛЬ 2: ЦЕЛЫЕ ЧИСЛА (big_Z) ==========
+#include "Module_2/part0.h"
+#include "Module_2/part1.h"
+#include "Module_2/part2.h"
+#include "Module_2/part3.h"
+#include "Module_2/part4.h"
+
+
+// ========== МОДУЛЬ 3: РАЦИОНАЛЬНЫЕ ЧИСЛА (big_Q) ==========
+#include "Module_3/part0.h"
+#include "Module_3/part1.h"
+#include "Module_3/part2.h"
+#include "Module_3/part3.h"
+#include "Module_3/part4.h"
+
+
+// ========== МОДУЛЬ 4: ПОЛИНОМЫ (big_P) ==========
+#include "Module_4/part0.h"
+#include "Module_4/part1.h"
+#include "Module_4/part2.h"
+#include "Module_4/part3.h"
+#include "Module_4/part4.h"
 
 using namespace std;
 

@@ -1,9 +1,8 @@
-#pragma once
 #include <cstddef>
 #include <iostream>
 #include <vector>
-#include <string>
-
+#ifndef _NATURAL_PART0
+#define _NATURAL_PART0
 using namespace std;
 
 class big_N{
@@ -28,3 +27,5 @@ class big_N{
     }
 };
 ostream& operator << (ostream& os, const big_N& n);
+
+#endif

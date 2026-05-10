@@ -1,11 +1,11 @@
-#pragma once
 #include <iostream>
 #include <vector>
 #include <string>
 #include <cmath>
 
 #include "../Module_1/part4.h"
-
+#ifndef _INTEGER_PART0
+#define _INTEGER_PART0
 using namespace std;
 
 extern bool ALWAYS_PRINT_SIGN;
@@ -49,3 +49,5 @@ class big_Z{
 };
 ostream& operator << (ostream& os, const big_Z& n);
 char NZER_Z_B(const big_Z &z);
+
+#endif

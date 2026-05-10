@@ -1,4 +1,3 @@
-#pragma once
 #include <iostream>
 #include <vector>
 #include <string>
@@ -9,9 +8,13 @@
 #include <algorithm>
 #include <map>
 
+
 #include "../Module_1/natural.h"
 #include "../Module_2/integer.h"
 #include "../Module_3/rational.h"
+
+#ifndef _POLINOMIAL_PART0
+#define _POLINOMIAL_PART0
 
 using namespace std;
 
@@ -131,3 +134,5 @@ private:
 ostream& operator<<(ostream& os, const big_P& p);
 big_P DIV_PQ_P(big_P p, const big_Q &div);
 char NZER_P_B(const big_P &p);
+
+#endif
