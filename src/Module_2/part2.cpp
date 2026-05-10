@@ -12,6 +12,8 @@ big_N TRANS_Z_N(const big_Z &z) {
     if (SGN_Z_D(z) == -1) return big_N();
     return big_N(z.digits);
 }
+
+// Переписать потом под норм модуль
 big_Z MOD_ZZ_Z(const big_Z &a, const big_Z &b) {
     if (SGN_Z_D(b) == 0) return big_Z();
     if (SGN_Z_D(a) == 0) return big_Z("0");

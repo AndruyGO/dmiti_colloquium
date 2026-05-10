@@ -1,6 +1,7 @@
 #pragma once
-#ifndef _NATURAL
-#define _NATURAL
+
+#ifndef _POLINOMIAL
+#define _POLINOMIAL
 
 #include "part0.h"
 #include "part1.h"

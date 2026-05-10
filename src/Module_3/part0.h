@@ -1,4 +1,3 @@
-#pragma once
 #include <iostream>
 #include <vector>
 #include <string>
@@ -8,11 +7,14 @@
 #include "../Module_1/part0.h"
 #include "../Module_2/part0.h"
 
+#ifndef _RATIONAL_PART0
+#define _RATIONAL_PART0
+
 using namespace std;
 
 
 extern bool ALWAYS_PRINT_DENOMINATOR;
-
+extern bool ALWAYS_REDUCE;
 
 class big_Q{
     public:
@@ -93,3 +95,5 @@ class big_Q{
 };
 
 ostream& operator << (ostream& os, const big_Q& q);
+
+#endif

@@ -5,6 +5,7 @@
 
 
 bool ALWAYS_PRINT_DENOMINATOR = 1;
+bool ALWAYS_REDUCE = 1;
 
 ostream& operator << (ostream& os, const big_Q& q) {
     if(!NZER_N_B(q.up)) { os << "0"; return os; }
