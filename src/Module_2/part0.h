@@ -1,4 +1,6 @@
-#pragma once
+#ifndef _INTEGER_PART0
+#define _INTEGER_PART0
+
 #include <iostream>
 #include <vector>
 #include <string>
@@ -49,3 +51,5 @@ class big_Z{
 };
 ostream& operator << (ostream& os, const big_Z& n);
 char NZER_Z_B(const big_Z &z);
+
+#endif

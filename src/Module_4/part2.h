@@ -1,4 +1,6 @@
-#pragma once
+#ifndef _POLYNOMIAL_PART2
+#define _POLYNOMIAL_PART2
+
 #include "part0.h"
 #include "../Module_3/part0.h"
 
@@ -8,3 +10,5 @@ big_P MUL_PQ_P(big_P p, const big_Q &q);
 
 big_P DIV_PP_P(big_P p, const big_P &d);
 big_P MOD_PP_P(big_P p, const big_P &d);
+
+#endif
