@@ -125,6 +125,8 @@ Statement Parser::parse_statement() {
 
     else if (auto t_type = match(TokenType::Type)) {
         if (auto t_name = match(TokenType::Identifier)) {
+            if (t_name.value().lexeme == "x")
+                throw std::runtime_error("Assingment of keyword 'x' is not allowed");
             std::string name = std::string {
                 t_name.value().lexeme.data(), t_name.value().lexeme.size()};
             if (match(TokenType::Assign)) {

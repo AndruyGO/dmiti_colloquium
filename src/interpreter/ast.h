@@ -19,7 +19,7 @@ struct If;
 struct While;
 
 using Expression = std::variant<Number, Variable, BinaryOp>;
-using Statement = std::variant<Print, If, While, Block, Assignment>;
+using Statement = std::variant<Assignment, Print, If, While, Block>;
 
 struct Number {
     big_Z value;
