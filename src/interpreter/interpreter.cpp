@@ -1,13 +1,10 @@
+#include "../Module_1/natural.h"
+#include "../Module_2/integer.h"
+#include "../Module_3/rational.h"
+#include "../Module_4/polynomial.h"
+
 #include "interpreter.h"
 #include "ast.h"
-#include "../Module_2/part1.h"
-#include "../Module_2/part2.h"
-#include "../Module_2/part3.h"
-#include "../Module_2/part4.h"
-#include "../Module_4/part1.h"
-#include "../Module_4/part2.h"
-#include "../Module_4/part3.h"
-#include "../Module_4/part4.h"
 
 #include <stdexcept>
 #include <variant>
@@ -65,6 +62,10 @@ Result Interpreter::evaluate_expression(const Expression& expr) {
                                     TRANS_Z_Q(TRANS_N_Z(n)),
                                     TRANS_Z_Q(TRANS_N_Z(other_n))
                                 );
+                            if (op.op == "//")
+                                return DIV_NN_N(n, other_n);
+                            if (op.op == "%")
+                                return MOD_NN_N(n, other_n);
                             throw std::runtime_error("Unknown operator encountered during evaluation");
                         },
                         [&](const big_Z& other_z) -> Result {
@@ -79,6 +80,10 @@ Result Interpreter::evaluate_expression(const Expression& expr) {
                                     TRANS_Z_Q(TRANS_N_Z(n)),
                                     TRANS_Z_Q(other_z)
                                 );
+                            if (op.op == "//")
+                                return DIV_ZZ_Z(TRANS_N_Z(n), other_z);
+                            if (op.op == "%")
+                                return MOD_ZZ_Z(TRANS_N_Z(n), other_z);
                             throw std::runtime_error("Unknown operator encountered during evaluation");
                         },
                         [&](const big_Q& other_q) -> Result {
@@ -93,6 +98,8 @@ Result Interpreter::evaluate_expression(const Expression& expr) {
                                     TRANS_Z_Q(TRANS_N_Z(n)),
                                     other_q
                                 );
+                            if (op.op == "//" || op.op == "%")
+                                throw std::runtime_error("Modulo division not possible");
                             throw std::runtime_error("Unknown operator encountered during evaluation");
                         },
                         [&](const big_P& other_p) -> Result {
@@ -108,6 +115,8 @@ Result Interpreter::evaluate_expression(const Expression& expr) {
                                 return MUL_PP_P(p, other_p);
                             if (op.op == "/")
                                 return DIV_PP_P(p, other_p);
+                            if (op.op == "//" || op.op == "%")
+                                throw std::runtime_error("Modulo division not possible");
                             throw std::runtime_error("Unknown operator encountered during evaluation");
                         }
                     }, right);
@@ -128,6 +137,10 @@ Result Interpreter::evaluate_expression(const Expression& expr) {
                                     TRANS_Z_Q(z),
                                     TRANS_Z_Q(TRANS_N_Z(other_n))
                                 );
+                            if (op.op == "//")
+                                return DIV_ZZ_Z(z, TRANS_N_Z(other_n));
+                            if (op.op == "%")
+                                return MOD_ZZ_Z(z, TRANS_N_Z(other_n));
                             throw std::runtime_error("Unknown operator encountered during evaluation");
                         },
                         [&](const big_Z& other_z) -> Result {
@@ -142,6 +155,10 @@ Result Interpreter::evaluate_expression(const Expression& expr) {
                                     TRANS_Z_Q(z),
                                     TRANS_Z_Q(other_z)
                                 );
+                            if (op.op == "//")
+                                return DIV_ZZ_Z(z, other_z);
+                            if (op.op == "%")
+                                return MOD_ZZ_Z(z, other_z);
                             throw std::runtime_error("Unknown operator encountered during evaluation");
                         },
                         [&](const big_Q& other_q) -> Result {
@@ -156,6 +173,8 @@ Result Interpreter::evaluate_expression(const Expression& expr) {
                                     TRANS_Z_Q(z),
                                     other_q
                                 );
+                            if (op.op == "//" || op.op == "%")
+                                throw std::runtime_error("Modulo division not possible");
                             throw std::runtime_error("Unknown operator encountered during evaluation");
                         },
                         [&](const big_P& other_p) -> Result {
@@ -171,6 +190,8 @@ Result Interpreter::evaluate_expression(const Expression& expr) {
                                 return MUL_PP_P(p, other_p);
                             if (op.op == "/")
                                 return DIV_PP_P(p, other_p);
+                            if (op.op == "//" || op.op == "%")
+                                throw std::runtime_error("Modulo division not possible");
                             throw std::runtime_error("Unknown operator encountered during evaluation");
                         }
                     }, right);
@@ -191,6 +212,8 @@ Result Interpreter::evaluate_expression(const Expression& expr) {
                                     q,
                                     TRANS_Z_Q(TRANS_N_Z(other_n))
                                 );
+                            if (op.op == "//" || op.op == "%")
+                                throw std::runtime_error("Modulo division not possible");
                             throw std::runtime_error("Unknown operator encountered during evaluation");
                         },
                         [&](const big_Z& other_z) -> Result {
@@ -205,6 +228,8 @@ Result Interpreter::evaluate_expression(const Expression& expr) {
                                     q,
                                     TRANS_Z_Q(other_z)
                                 );
+                            if (op.op == "//" || op.op == "%")
+                                throw std::runtime_error("Modulo division not possible");
                             throw std::runtime_error("Unknown operator encountered during evaluation");
                         },
                         [&](const big_Q& other_q) -> Result {
@@ -216,6 +241,8 @@ Result Interpreter::evaluate_expression(const Expression& expr) {
                                 return MUL_QQ_Q(q, other_q);
                             if (op.op == "/")
                                 return DIV_QQ_Q(q, other_q);
+                            if (op.op == "//" || op.op == "%")
+                                throw std::runtime_error("Modulo division not possible");
                             throw std::runtime_error("Unknown operator encountered during evaluation");
                         },
                         [&](const big_P& other_p) -> Result {
@@ -231,6 +258,8 @@ Result Interpreter::evaluate_expression(const Expression& expr) {
                                 return MUL_PP_P(p, other_p);
                             if (op.op == "/")
                                 return DIV_PP_P(p, other_p);
+                            if (op.op == "//" || op.op == "%")
+                                throw std::runtime_error("Modulo division not possible");
                             throw std::runtime_error("Unknown operator encountered during evaluation");
                         }
                     }, right);
@@ -252,6 +281,8 @@ Result Interpreter::evaluate_expression(const Expression& expr) {
                                 return MUL_PP_P(p, other_p);
                             if (op.op == "/")
                                 return DIV_PP_P(p, other_p);
+                            if (op.op == "//" || op.op == "%")
+                                throw std::runtime_error("Modulo division not possible");
                             throw std::runtime_error("Unknown operator encountered during evaluation");
                         },
                         [&](const big_Z& other_z) -> Result {
@@ -267,6 +298,8 @@ Result Interpreter::evaluate_expression(const Expression& expr) {
                                 return MUL_PP_P(p, other_p);
                             if (op.op == "/")
                                 return DIV_PP_P(p, other_p);
+                            if (op.op == "//" || op.op == "%")
+                                throw std::runtime_error("Modulo division not possible");
                             throw std::runtime_error("Unknown operator encountered during evaluation");
                         },
                         [&](const big_Q& other_q) -> Result {
@@ -282,6 +315,8 @@ Result Interpreter::evaluate_expression(const Expression& expr) {
                                 return MUL_PP_P(p, other_p);
                             if (op.op == "/")
                                 return DIV_PP_P(p, other_p);
+                            if (op.op == "//" || op.op == "%")
+                                throw std::runtime_error("Modulo division not possible");
                             throw std::runtime_error("Unknown operator encountered during evaluation");
                         },
                         [&](const big_P& other_p) -> Result {
@@ -293,6 +328,8 @@ Result Interpreter::evaluate_expression(const Expression& expr) {
                                 return MUL_PP_P(p, other_p);
                             if (op.op == "/")
                                 return DIV_PP_P(p, other_p);
+                            if (op.op == "//" || op.op == "%")
+                                throw std::runtime_error("Modulo division not possible");
                             throw std::runtime_error("Unknown operator encountered during evaluation");
                         }
                     }, right);
@@ -306,10 +343,11 @@ std::ostream& operator<<(std::ostream& os, const Result& obj) {
     std::visit(overloaded
     {
         [&](const big_N& n) {os << n;},
-        [&](const big_Z& n) {os << n;},
-        [&](const big_Q& n) {os << n;},
-        [&](const big_P& n) {os << n;},
+        [&](const big_Z& z) {os << z;},
+        [&](const big_Q& q) {os << q;},
+        [&](const big_P& p) {os << p;},
     }, obj);
+    return os;
 };
 
 void Interpreter::execute_statement(const Statement& stmt) {
@@ -335,12 +373,15 @@ void Interpreter::execute_statement(const Statement& stmt) {
         },
         [&](const If& st) {
             // TODO
+            std::cout << "Nothing\n";
         },
         [&](const While& st) {
             // TODO
+            std::cout << "Nothing\n";
         },
         [&](const Block& st) {
             // TODO
+            std::cout << "Nothing\n";
         },
     }, stmt);
 }

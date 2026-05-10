@@ -67,9 +67,18 @@ Token Lexer::read_operator_or_symbol() {
     case '+':
     case '-':
     case '*':
+    case '%':
+        return Token {
+            TokenType::Operator, source.substr(current - 1, 1), line, column};
     case '/':
-        return Token {TokenType::Operator, source.substr(current - 1, 1), line,
-                      column};
+        if (peek() == '/') {
+            advance();
+            return Token {TokenType::Operator, source.substr(current - 2, 2),
+                line, column};
+        } else {
+            return Token {
+                TokenType::Operator, source.substr(current - 1, 1), line, column};
+        }
     case '=':
         return Token {TokenType::Assign, "=", line, column};
     case '(':
@@ -85,8 +94,8 @@ Token Lexer::read_operator_or_symbol() {
         return Token {TokenType::Semicolon, ";", line, column};
 
     default:
-        return Token {TokenType::Unknown, source.substr(current - 1, 1), line,
-                      column};
+        return Token {
+            TokenType::Unknown, source.substr(current - 1, 1), line, column};
     }
 }
 

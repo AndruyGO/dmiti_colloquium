@@ -56,7 +56,7 @@ std::optional<Token> Parser::match(
 
 Expression Parser::parse_term() {
     Expression expr = parse_factor();
-    while (auto t_op = match(TokenType::Operator, {"*", "%"})) {
+    while (auto t_op = match(TokenType::Operator, {"*", "%", "/", "//"})) {
         std::string op {tokens[current - 1].lexeme.data(),
             tokens[current - 1].lexeme.size()};
         Expression right = parse_factor();

@@ -2,6 +2,9 @@
 #include "Module_2/integer.h"
 #include "Module_3/rational.h"
 #include "Module_4/polynomial.h"
+
+#include "interpreter/repl.h"
+
 #include <iostream>
 #include <string>
 
@@ -73,7 +76,7 @@ void help(){
     cout << endl;
 }
 
-int main() {
+void simple_cmd_runner() {
     string cmd, s1, s2, s3, s4;
     help();
     while (true) {
@@ -353,6 +356,9 @@ int main() {
             cout << "Unknown command: " << cmd << endl;
         }
     }
-    
+}
+
+int main(int argc, char *argv[]) {
+    start_repl();
     return 0;
 }
