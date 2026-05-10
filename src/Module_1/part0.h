@@ -3,6 +3,7 @@
 #include <iostream>
 #include <vector>
 #include <string>
+#include <regex>
 
 using namespace std;
 
@@ -20,6 +21,13 @@ class big_N{
     }
 
     big_N(const string &_digits){
+        regex pattern("^[1-9][0-9]*$|^0$");
+        if (!regex_match(_digits, pattern)) {
+            digits = {0};
+            cout << "Incorrect number format or Incorrect argument type\n";
+            exit(0);
+            return;
+        }
         unsigned long size = _digits.size();
         digits.resize(size);
         for (int i=0; i < size; i++) {

@@ -3,6 +3,7 @@
 #include <vector>
 #include <string>
 #include <cmath>
+#include <regex>
 
 #include "../Module_1/part4.h"
 
@@ -19,14 +20,26 @@ class big_Z{
 	big_Z(){}
 
     big_Z(char _sign, const vector<char> &_digits){
+        
+        
         sign = _sign;
         digits.resize(_digits.size());
+        
         for(int i = 0; i < digits.size(); i++){
             digits[i] = _digits[i];
         }
     }
 
     big_Z(const string &_digits){
+        regex pattern("^[+-]?(?:[1-9][0-9]*|0)$");
+        if (!regex_match(_digits, pattern)) {
+            sign = 1;
+            digits = {0};
+            cout << "Incorrect number format or Incorrect argument type\n";
+            exit(0);
+            return;
+        }
+        
         int start;
         unsigned long size = _digits.size();
         if(_digits[0] == '-'){
