@@ -1,4 +1,6 @@
-#pragma once
+#ifndef _RATIONAL_PART0
+#define _RATIONAL_PART0
+
 #include <iostream>
 #include <vector>
 #include <string>
@@ -82,3 +84,5 @@ class big_Q{
 };
 
 ostream& operator << (ostream& os, const big_Q& q);
+
+#endif

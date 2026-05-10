@@ -2,14 +2,13 @@ SHELL := /bin/sh
 TARGET := prog
 
 CXX := g++
-CXXFLAGS := -std=c++17 -Wall -Wextra -Wpedantic
-
+CXXFLAGS := -std=c++23 -Wall -Wextra -Wpedantic
 BUILD := build
 
 CFG ?= debug
 
 ifeq ($(CFG),debug)
-	CXXFLAGS += -g -O0
+	CXXFLAGS += -g -O1
 else
 	CXXFLAGS += -O3
 endif

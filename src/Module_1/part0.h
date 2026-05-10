@@ -1,4 +1,6 @@
-#pragma once
+#ifndef _NATURAL_PART0
+#define _NATURAL_PART0
+
 #include <cstddef>
 #include <iostream>
 #include <vector>
@@ -28,3 +30,5 @@ class big_N{
     }
 };
 ostream& operator << (ostream& os, const big_N& n);
+
+#endif

@@ -1,4 +1,6 @@
-#pragma once
+#ifndef _POLYNOMIAL_PART0
+#define _POLYNOMIAL_PART0
+
 #include <iostream>
 #include <vector>
 #include <string>
@@ -131,3 +133,5 @@ private:
 ostream& operator<<(ostream& os, const big_P& p);
 big_P DIV_PQ_P(big_P p, const big_Q &div);
 char NZER_P_B(const big_P &p);
+
+#endif
