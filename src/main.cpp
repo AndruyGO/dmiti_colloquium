@@ -25,6 +25,7 @@ void help1(){
     cout << "MOD_NN_N (a b)     - деление (остаток)" << endl;
     cout << "GCF_NN_N (a b)     - НОД" << endl;
     cout << "LCM_NN_N (a b)     - НОК" << endl;
+    cout << "-------------------------------------------\n" << endl;
 }
 
 void help2(){
@@ -39,6 +40,7 @@ void help2(){
     cout << "MUL_ZZ_Z (a b)     - умножение" << endl;
     cout << "DIV_ZZ_Z (a b)     - деление (частное)" << endl;
     cout << "MOD_ZZ_Z (a b)     - деление (остаток, неотрицательный)" << endl;
+    cout << "-------------------------------------------\n" << endl;
 }
 
 void help3(){
@@ -51,6 +53,7 @@ void help3(){
     cout << "SUB_QQ_Q (a b)     - вычитание" << endl;
     cout << "MUL_QQ_Q (a b)     - умножение" << endl;
     cout << "DIV_QQ_Q (a b)     - деление" << endl;
+    cout << "-------------------------------------------\n" << endl;
 }
 
 void help4(){
@@ -68,6 +71,7 @@ void help4(){
     cout << "GCF_PP_P (a b)     - НОД" << endl;
     cout << "DER_P_P (a)        - производная" << endl;
     cout << "NMR_P_P (a)        - кратные корни в простые" << endl;
+    cout << "-------------------------------------------\n" << endl;
 }
 
 void basic_help(){
@@ -79,25 +83,19 @@ void basic_help(){
     cout << "HELP 4             - Функции модуля 4 - Полиномы" << endl;
     cout << "HELP 0             - Дополнительные функции" << endl;
     cout << "HELP 5             - Вывод всех функций модулей" << endl;
-    cout << "-------------------------------------------" << endl;
+    cout << "-------------------------------------------\n" << endl;
     cout << "Введите функцию, а затем введите аргументы" << endl;
     cout << "Пример:" << endl;
-    cout << "> SUB_NN_N 123 45 \n" << endl;
+    cout << "> SUB_NN_N 123 45\n" << endl;
+    cout << "-------------------------------------------\n" << endl;
 }
 
 void help0(){ // в раззработке
-        cout << "\n========== Дополнительные функции ==========" << endl;
-    cout << "EXIT               - выход" << endl;
-    cout << "PRINT_SIGN             - Функции модуля 1 - Натуральные числа" << endl;
-    cout << "HELP 2             - Функции модуля 2 - Целые числа" << endl;
-    cout << "HELP 3             - Функции модуля 3 - Дроби" << endl;
-    cout << "HELP 4             - Функции модуля 4 - Полиномы" << endl;
-    cout << "HELP 0             - Дополнительные функции" << endl;
-    cout << "HELP 5             - Вывод всех функций модулей" << endl;
+    cout << "\n========== Дополнительные функции ==========" << endl;
+    cout << "ALWAYS_PRINT_SIGN 1/0         - если 1, то знак положительных чисел будет выводится всегда" << endl;
+    cout << "ALWAYS_PRINT_DENOMINATOR 1/0  - если 1, то знаменатель = 1, будет выведен" << endl;
+    cout << "ALWAYS_REDUCE 1/0             - если 1, то после любых операций с дробью она будет сокращена" << endl;
     cout << "-------------------------------------------" << endl;
-    cout << "Введите функцию, а затем введите аргументы" << endl;
-    cout << "Пример:" << endl;
-    cout << "> SUB_NN_N 123 45 \n" << endl;
 }
 
 
@@ -129,7 +127,7 @@ int main() {
     ALWAYS_PRINT_SIGN = 0;
     ALWAYS_REDUCE = 1;
     string cmd, s1, s2, s3, s4;
-    help();
+    basic_help();
     while (true) {
         cmd = ""; s1 = ""; s2 = ""; s3 = ""; s4 = "";
         
@@ -137,13 +135,49 @@ int main() {
         cin >> cmd;
         
         if (cmd == "EXIT") break;
+
         cin.ignore();  // <- игнорируем символ новой строки после команды
         cin >> ws;     // <- пропускаем пробелы
-        
-        if(cmd == "HELP"){
-            cin >> s1;
 
-            help();
+
+        if(cmd == "ALWAYS_PRINT_DENOMINATOR"){
+            int a; cin >> a;
+            ALWAYS_PRINT_DENOMINATOR = a != 0;
+        }
+        else if(cmd == "ALWAYS_PRINT_SIGN"){
+            int a; cin >> a;
+            ALWAYS_PRINT_SIGN = a != 0;
+        }
+        else if(cmd == "ALWAYS_REDUCE"){
+            int a; cin >> a;
+            ALWAYS_REDUCE = a != 0;
+        }
+        else if(cmd == "HELP"){
+            int a;
+            cin >> a;
+            switch (a)
+            {
+            case 0:
+                help0();
+                break;
+            case 1:
+                help1();
+                break;
+            case 2:
+                help2();
+                break;
+            case 3:
+                help3();
+                break;
+            case 4:
+                help4();
+                break;
+            case 5:
+                help();
+                break;
+            default:
+                basic_help();
+            }
         }
 
         // ========== МОДУЛЬ 1: НАТУРАЛЬНЫЕ ЧИСЛА ==========
@@ -742,6 +776,7 @@ int main() {
         }
         else {
             cout << "Unknown command: " << cmd << endl;
+            basic_help();
         }
     }
     
