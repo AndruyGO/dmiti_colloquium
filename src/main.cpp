@@ -7,7 +7,9 @@
 
 using namespace std;
 
-void help(){
+
+
+void help1(){
     cout << "\n========== МОДУЛЬ 1: НАТУРАЛЬНЫЕ ЧИСЛА ==========" << endl;
     cout << "COM_NN_D (a b)     - сравнение: 0=равны,1=меньше,2=больше" << endl;
     cout << "NZER_N_B (a)       - проверка на ноль: 0=ноль,1=не ноль" << endl;
@@ -23,7 +25,9 @@ void help(){
     cout << "MOD_NN_N (a b)     - деление (остаток)" << endl;
     cout << "GCF_NN_N (a b)     - НОД" << endl;
     cout << "LCM_NN_N (a b)     - НОК" << endl;
-    
+}
+
+void help2(){
     cout << "\n========== МОДУЛЬ 2: ЦЕЛЫЕ ЧИСЛА ==========" << endl;
     cout << "ABS_Z_Z (a)        - абсолютная величина" << endl;
     cout << "SGN_Z_D (a)        - знак: -1,0,1" << endl;
@@ -35,7 +39,9 @@ void help(){
     cout << "MUL_ZZ_Z (a b)     - умножение" << endl;
     cout << "DIV_ZZ_Z (a b)     - деление (частное)" << endl;
     cout << "MOD_ZZ_Z (a b)     - деление (остаток, неотрицательный)" << endl;
-    
+}
+
+void help3(){
     cout << "\n========== МОДУЛЬ 3: РАЦИОНАЛЬНЫЕ ЧИСЛА ==========" << endl;
     cout << "RED_Q_Q (a)        - сокращение дроби" << endl;
     cout << "INT_Q_B (a)        - проверка на целое: 1=да,0=нет" << endl;
@@ -45,7 +51,9 @@ void help(){
     cout << "SUB_QQ_Q (a b)     - вычитание" << endl;
     cout << "MUL_QQ_Q (a b)     - умножение" << endl;
     cout << "DIV_QQ_Q (a b)     - деление" << endl;
-    
+}
+
+void help4(){
     cout << "\n========== МОДУЛЬ 4: ПОЛИНОМЫ ==========" << endl;
     cout << "ADD_PP_P (a b)     - сложение" << endl;
     cout << "SUB_PP_P (a b)     - вычитание" << endl;
@@ -60,18 +68,46 @@ void help(){
     cout << "GCF_PP_P (a b)     - НОД" << endl;
     cout << "DER_P_P (a)        - производная" << endl;
     cout << "NMR_P_P (a)        - кратные корни в простые" << endl;
-    
-    cout << "\n========== УПРАВЛЕНИЕ ==========" << endl;
-    cout << "HELP               - показать справку" << endl;
-    cout << "EXIT               - выход" << endl;
-    
-    cout << "\nФОРМАТ ВВОДА:" << endl;
-    cout << "  N: 123" << endl;
-    cout << "  Z: +123 или -123 или 123" << endl;
-    cout << "  Q: 1/2 или -3/4 или 5" << endl;
-    cout << "  P: x^2+2x+1 или 5x^5-3x^3+2" << endl;
-    cout << endl;
 }
+
+void basic_help(){
+    cout << "\n========== Длинная арифметика ==========" << endl;
+    cout << "EXIT               - выход" << endl;
+    cout << "HELP 1             - Функции модуля 1 - Натуральные числа" << endl;
+    cout << "HELP 2             - Функции модуля 2 - Целые числа" << endl;
+    cout << "HELP 3             - Функции модуля 3 - Дроби" << endl;
+    cout << "HELP 4             - Функции модуля 4 - Полиномы" << endl;
+    cout << "HELP 0             - Дополнительные функции" << endl;
+    cout << "HELP 5             - Вывод всех функций модулей" << endl;
+    cout << "-------------------------------------------" << endl;
+    cout << "Введите функцию, а затем введите аргументы" << endl;
+    cout << "Пример:" << endl;
+    cout << "> SUB_NN_N 123 45 \n" << endl;
+}
+
+void help0(){ // в раззработке
+        cout << "\n========== Дополнительные функции ==========" << endl;
+    cout << "EXIT               - выход" << endl;
+    cout << "PRINT_SIGN             - Функции модуля 1 - Натуральные числа" << endl;
+    cout << "HELP 2             - Функции модуля 2 - Целые числа" << endl;
+    cout << "HELP 3             - Функции модуля 3 - Дроби" << endl;
+    cout << "HELP 4             - Функции модуля 4 - Полиномы" << endl;
+    cout << "HELP 0             - Дополнительные функции" << endl;
+    cout << "HELP 5             - Вывод всех функций модулей" << endl;
+    cout << "-------------------------------------------" << endl;
+    cout << "Введите функцию, а затем введите аргументы" << endl;
+    cout << "Пример:" << endl;
+    cout << "> SUB_NN_N 123 45 \n" << endl;
+}
+
+
+void help(){
+    help1();
+    help2();
+    help3();
+    help4();   
+}
+
 bool is_empty_N(const big_N& n) {
     return n.digits.empty();
 }
@@ -105,11 +141,13 @@ int main() {
         cin >> ws;     // <- пропускаем пробелы
         
         if(cmd == "HELP"){
+            cin >> s1;
+
             help();
         }
 
         // ========== МОДУЛЬ 1: НАТУРАЛЬНЫЕ ЧИСЛА ==========
-        if (cmd == "COM_NN_D") {
+        else if (cmd == "COM_NN_D") {
             cin >> s1 >> s2;
             big_N a(s1), b(s2);
             if (is_empty_N(a) || is_empty_N(b)) {
