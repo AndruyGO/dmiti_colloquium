@@ -37,9 +37,9 @@ big_P GCF_PP_P(big_P a, big_P b) {
     if (!NZER_P_B(a)) return b;
     if (!NZER_P_B(b)) return a;
 
-    int iteration = 0;
-    while (NZER_P_B(b) && NZER_P_B(a) && iteration < 100) {
-        iteration++;
+    
+    while (NZER_P_B(b) && NZER_P_B(a)) {
+        
 
         // Проверка на константу
         {
@@ -64,12 +64,8 @@ big_P GCF_PP_P(big_P a, big_P b) {
         a = b;
         b = r;
     }
-
-    big_P res = a;
-    if (res.monomials.size() != 0 && NZER_P_B(res)) {
-        res = DIV_PQ_P(res, res.monomials[0].val);
-    }
-    return res;
+    
+    return a;
 }
 
 // НОРМИРОВКА (NMR)
