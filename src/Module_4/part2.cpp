@@ -33,8 +33,7 @@ big_P DIV_MOD_PP(big_P p, const big_P &d, char type) {
         // разница степеней
         deg = SUB_NN_N(DEG_P_N(p), DEG_P_N(d));
         // Нахождение множителя коэффициентов
-        multiplicator = big_Q(LED_P_Q(d).sign, LED_P_Q(d).down, LED_P_Q(d).up);
-        multiplicator = MUL_QQ_Q(multiplicator, LED_P_Q(p));
+        multiplicator = DIV_QQ_Q(LED_P_Q(p), LED_P_Q(d));
         res.push_back({deg, multiplicator});
 
         // Создание промежуточного многочлена который вычитается из основного
