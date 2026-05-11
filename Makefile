@@ -6,7 +6,7 @@ CXXFLAGS := -std=c++17 -Wall -Wextra -Wpedantic
 
 BUILD := build
 
-CFG ?= debug
+CFG ?= release
 
 ifeq ($(CFG),debug)
 	CXXFLAGS += -g -O0

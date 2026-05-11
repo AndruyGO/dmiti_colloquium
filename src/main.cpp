@@ -1,9 +1,9 @@
 #include <iostream>
 #include <string>
-#include <Module_1/natural.h>
-#include <Module_2/integer.h>
-#include <Module_3/rational.h>
-#include <Module_4/polynomial.h>
+#include "Module_1/natural.h"
+#include "Module_2/integer.h"
+#include "Module_3/rational.h"
+#include "Module_4/polynomial.h"
 
 using namespace std;
 
@@ -72,6 +72,21 @@ void help(){
     cout << "  P: x^2+2x+1 или 5x^5-3x^3+2" << endl;
     cout << endl;
 }
+bool is_empty_N(const big_N& n) {
+    return n.digits.empty();
+}
+
+bool is_zero_N(const big_N& n) {
+    return n.digits.size() == 1 && n.digits[0] == 0;
+}
+
+bool is_empty_Z(const big_Z& z) {
+    return z.digits.empty();
+}
+
+bool is_empty_P(const big_P& p) {
+    return p.monomials.empty();
+}
 
 int main() {
     string cmd, s1, s2, s3, s4;
@@ -91,79 +106,190 @@ int main() {
         }
 
         // ========== МОДУЛЬ 1: НАТУРАЛЬНЫЕ ЧИСЛА ==========
-        else if (cmd == "COM_NN_D") {
+        if (cmd == "COM_NN_D") {
             cin >> s1 >> s2;
             big_N a(s1), b(s2);
+            if (is_empty_N(a) || is_empty_N(b)) {
+                cout << "Некорректные Аргументы\n";
+                continue;
+            }
             cout << (int)COM_NN_D(a, b) << endl;
         }
         else if (cmd == "NZER_N_B") {
             cin >> s1;
             big_N a(s1);
+            if (is_empty_N(a)) {
+                cout << "Некорректные Аргументы\n";
+                continue;
+            }
             cout << (int)NZER_N_B(a) << endl;
         }
         else if (cmd == "ADD_1N_N") {
             cin >> s1;
             big_N a(s1);
-            cout << ADD_1N_N(a) << endl;
+            if (is_empty_N(a)) {
+                cout << "Некорректные Аргументы\n";
+                continue;
+            }
+            big_N res = ADD_1N_N(a);
+            if (is_empty_N(res)) {
+                cout << "Некорректные Аргументы\n";
+                continue;
+            }
+            cout << res << endl;
         }
         else if (cmd == "ADD_NN_N") {
             cin >> s1 >> s2;
             big_N a(s1), b(s2);
-            cout << ADD_NN_N(a, b) << endl;
+            if (is_empty_N(a) || is_empty_N(b)) {
+                cout << "Некорректные Аргументы\n";
+                continue;
+            }
+            big_N res = ADD_NN_N(a, b);
+            if (is_empty_N(res)) {
+                cout << "Некорректные Аргументы\n";
+                continue;
+            }
+            cout << res << endl;
         }
         else if (cmd == "SUB_NN_N") {
             cin >> s1 >> s2;
             big_N a(s1), b(s2);
-            cout << SUB_NN_N(a, b) << endl;
+            if (is_empty_N(a) || is_empty_N(b)) {
+                cout << "Некорректные Аргументы\n";
+                continue;
+            }
+            big_N res = SUB_NN_N(a, b);
+            if (is_empty_N(res)) {
+                cout << "Некорректные Аргументы\n";
+                continue;
+            }
+            cout << res << endl;
         }
         else if (cmd == "MUL_ND_N") {
             cin >> s1 >> s2;
             big_N a(s1);
+            if (is_empty_N(a)) {
+                cout << "Некорректные Аргументы\n";
+                continue;
+            }
             char d = s2[0];
-            cout << MUL_ND_N(a, d) << endl;
+            big_N res = MUL_ND_N(a, d);
+            if (is_empty_N(res)) {
+                cout << "Некорректные Аргументы\n";
+                continue;
+            }
+            cout << res << endl;
         }
         else if (cmd == "MUL_Nk_N") {
             cin >> s1 >> s2;
             big_N a(s1);
+            if (is_empty_N(a)) {
+                cout << "Некорректные Аргументы\n";
+                continue;
+            }
             unsigned long k = stoul(s2);
-            cout << MUL_Nk_N(a, k) << endl;
+            big_N res = MUL_Nk_N(a, k);
+            if (is_empty_N(res)) {
+                cout << "Некорректные Аргументы\n";
+                continue;
+            }
+            cout << res << endl;
         }
         else if (cmd == "MUL_NN_N") {
             cin >> s1 >> s2;
             big_N a(s1), b(s2);
-            cout << MUL_NN_N(a, b) << endl;
+            if (is_empty_N(a) || is_empty_N(b)) {
+                cout << "Некорректные Аргументы\n";
+                continue;
+            }
+            big_N res = MUL_NN_N(a, b);
+            if (is_empty_N(res)) {
+                cout << "Некорректные Аргументы\n";
+                continue;
+            }
+            cout << res << endl;
         }
         else if (cmd == "SUB_NDN_N") {
             cin >> s1 >> s2 >> s3;
             big_N a(s1), b(s2);
+            if (is_empty_N(a) || is_empty_N(b)) {
+                cout << "Некорректные Аргументы\n";
+                continue;
+            }
             int k = stoi(s3);
-            cout << SUB_NDN_N(a, b, k) << endl;
+            big_N res = SUB_NDN_N(a, b, k);
+            if (is_empty_N(res)) {
+                cout << "Некорректные Аргументы\n";
+                continue;
+            }
+            cout << res << endl;
         }
         else if (cmd == "DIV_NN_Dk") {
             cin >> s1 >> s2 >> s3;
             big_N a(s1), b(s2);
+            if (is_empty_N(a) || is_empty_N(b)) {
+                cout << "Некорректные Аргументы\n";
+                continue;
+            }
             long long k = stoll(s3);
             cout << (int)DIV_NN_Dk(a, b, k) << endl;
         }
         else if (cmd == "DIV_NN_N") {
             cin >> s1 >> s2;
             big_N a(s1), b(s2);
-            cout << DIV_NN_N(a, b) << endl;
+            if (is_empty_N(a) || is_empty_N(b)) {
+                cout << "Некорректные Аргументы\n";
+                continue;
+            }
+            big_N res = DIV_NN_N(a, b);
+            if (is_empty_N(res)) {
+                cout << "Некорректные Аргументы\n";
+                continue;
+            }
+            cout << res << endl;
         }
         else if (cmd == "MOD_NN_N") {
             cin >> s1 >> s2;
             big_N a(s1), b(s2);
-            cout << MOD_NN_N(a, b) << endl;
+            if (is_empty_N(a) || is_empty_N(b)) {
+                cout << "Некорректные Аргументы\n";
+                continue;
+            }
+            big_N res = MOD_NN_N(a, b);
+            if (is_empty_N(res)) {
+                cout << "Некорректные Аргументы\n";
+                continue;
+            }
+            cout << res << endl;
         }
         else if (cmd == "GCF_NN_N") {
             cin >> s1 >> s2;
             big_N a(s1), b(s2);
-            cout << GCF_NN_N(a, b) << endl;
+            if (is_empty_N(a) || is_empty_N(b)) {
+                cout << "Некорректные Аргументы\n";
+                continue;
+            }
+            big_N res = GCF_NN_N(a, b);
+            if (is_empty_N(res)) {
+                cout << "Некорректные Аргументы\n";
+                continue;
+            }
+            cout << res << endl;
         }
         else if (cmd == "LCM_NN_N") {
             cin >> s1 >> s2;
             big_N a(s1), b(s2);
-            cout << LCM_NN_N(a, b) << endl;
+            if (is_empty_N(a) || is_empty_N(b)) {
+                cout << "Некорректные Аргументы\n";
+                continue;
+            }
+            big_N res = LCM_NN_N(a, b);
+            if (is_empty_N(res)) {
+                cout << "Некорректные Аргументы\n";
+                continue;
+            }
+            cout << res << endl;
         }
         
         // ========== МОДУЛЬ 2: ЦЕЛЫЕ ЧИСЛА ==========
@@ -171,52 +297,137 @@ int main() {
         else if (cmd == "ABS_Z_Z") {
             cin >> s1;
             big_Z a(s1);
-            cout << ABS_Z_Z(a) << endl;
+            if (is_empty_Z(a)) {
+                cout << "Некорректные Аргументы\n";
+                continue;
+            }
+            big_Z res = ABS_Z_Z(a);
+            if (is_empty_Z(res)) {
+                cout << "Некорректные Аргументы\n";
+                continue;
+            }
+            cout << res << endl;
         }
         else if (cmd == "SGN_Z_D") {
             cin >> s1;
             big_Z a(s1);
+            if (is_empty_Z(a)) {
+                cout << "Некорректные Аргументы\n";
+                continue;
+            }
             cout << (int)SGN_Z_D(a) << endl;
         }
         else if (cmd == "MUL_ZM_Z") {
             cin >> s1;
             big_Z a(s1);
-            cout << MUL_ZM_Z(a) << endl;
+            if (is_empty_Z(a)) {
+                cout << "Некорректные Аргументы\n";
+                continue;
+            }
+            big_Z res = MUL_ZM_Z(a);
+            if (is_empty_Z(res)) {
+                cout << "Некорректные Аргументы\n";
+                continue;
+            }
+            cout << res << endl;
         }
         else if (cmd == "TRANS_N_Z") {
             cin >> s1;
             big_N a(s1);
-            cout << TRANS_N_Z(a) << endl;
+            if (is_empty_N(a)) {
+                cout << "Некорректные Аргументы\n";
+                continue;
+            }
+            big_Z res = TRANS_N_Z(a);
+            if (is_empty_Z(res)) {
+                cout << "Некорректные Аргументы\n";
+                continue;
+            }
+            cout << res << endl;
         }
         else if (cmd == "TRANS_Z_N") {
             cin >> s1;
             big_Z a(s1);
-            cout << TRANS_Z_N(a) << endl;
+            if (is_empty_Z(a)) {
+                cout << "Некорректные Аргументы\n";
+                continue;
+            }
+            big_N res = TRANS_Z_N(a);
+            if (is_empty_N(res)) {
+                cout << "Некорректные Аргументы\n";
+                continue;
+            }
+            cout << res << endl;
         }
         else if (cmd == "ADD_ZZ_Z") {
             cin >> s1 >> s2;
             big_Z a(s1), b(s2);
-            cout << ADD_ZZ_Z(a, b) << endl;
+            if (is_empty_Z(a) || is_empty_Z(b)) {
+                cout << "Некорректные Аргументы\n";
+                continue;
+            }
+            big_Z res = ADD_ZZ_Z(a, b);
+            if (is_empty_Z(res)) {
+                cout << "Некорректные Аргументы\n";
+                continue;
+            }
+            cout << res << endl;
         }
         else if (cmd == "SUB_ZZ_Z") {
             cin >> s1 >> s2;
             big_Z a(s1), b(s2);
-            cout << SUB_ZZ_Z(a, b) << endl;
+            if (is_empty_Z(a) || is_empty_Z(b)) {
+                cout << "Некорректные Аргументы\n";
+                continue;
+            }
+            big_Z res = SUB_ZZ_Z(a, b);
+            if (is_empty_Z(res)) {
+                cout << "Некорректные Аргументы\n";
+                continue;
+            }
+            cout << res << endl;
         }
         else if (cmd == "MUL_ZZ_Z") {
             cin >> s1 >> s2;
             big_Z a(s1), b(s2);
-            cout << MUL_ZZ_Z(a, b) << endl;
+            if (is_empty_Z(a) || is_empty_Z(b)) {
+                cout << "Некорректные Аргументы\n";
+                continue;
+            }
+            big_Z res = MUL_ZZ_Z(a, b);
+            if (is_empty_Z(res)) {
+                cout << "Некорректные Аргументы\n";
+                continue;
+            }
+            cout << res << endl;
         }
         else if (cmd == "DIV_ZZ_Z") {
             cin >> s1 >> s2;
             big_Z a(s1), b(s2);
-            cout << DIV_ZZ_Z(a, b) << endl;
+            if (is_empty_Z(a) || is_empty_Z(b)) {
+                cout << "Некорректные Аргументы\n";
+                continue;
+            }
+            big_Z res = DIV_ZZ_Z(a, b);
+            if (is_empty_Z(res)) {
+                cout << "Некорректные Аргументы\n";
+                continue;
+            }
+            cout << res << endl;
         }
         else if (cmd == "MOD_ZZ_Z") {
             cin >> s1 >> s2;
             big_Z a(s1), b(s2);
-            cout << MOD_ZZ_Z(a, b) << endl;
+            if (is_empty_Z(a) || is_empty_Z(b)) {
+                cout << "Некорректные Аргументы\n";
+                continue;
+            }
+            big_Z res = MOD_ZZ_Z(a, b);
+            if (is_empty_Z(res)) {
+                cout << "Некорректные Аргументы\n";
+                continue;
+            }
+            cout << res << endl;
         }
         
         // ========== МОДУЛЬ 3: РАЦИОНАЛЬНЫЕ ЧИСЛА ==========
@@ -224,7 +435,12 @@ int main() {
         else if (cmd == "RED_Q_Q") {
             cin >> s1;
             big_Q a(s1);
-            cout << RED_Q_Q(a) << endl;
+            big_Q res = RED_Q_Q(a);
+            if (res.up.digits.empty() || res.down.digits.empty()) {
+                cout << "Некорректные Аргументы\n";
+                continue;
+            }
+            cout << res << endl;
         }
         else if (cmd == "INT_Q_B") {
             cin >> s1;
@@ -234,123 +450,253 @@ int main() {
         else if (cmd == "TRANS_Z_Q") {
             cin >> s1;
             big_Z a(s1);
-            cout << TRANS_Z_Q(a) << endl;
+            if (is_empty_Z(a)) {
+                cout << "Некорректные Аргументы\n";
+                continue;
+            }
+            big_Q res = TRANS_Z_Q(a);
+            if (res.up.digits.empty() || res.down.digits.empty()) {
+                cout << "Некорректные Аргументы\n";
+                continue;
+            }
+            cout << res << endl;
         }
         else if (cmd == "TRANS_Q_Z") {
             cin >> s1;
             big_Q a(s1);
-            cout << TRANS_Q_Z(a) << endl;
+            big_Z res = TRANS_Q_Z(a);
+            if (is_empty_Z(res)) {
+                cout << "Некорректные Аргументы\n";
+                continue;
+            }
+            cout << res << endl;
         }
         else if (cmd == "ADD_QQ_Q") {
             cin >> s1 >> s2;
             big_Q a(s1), b(s2);
-            cout << ADD_QQ_Q(a, b) << endl;
+            big_Q res = ADD_QQ_Q(a, b);
+            if (res.up.digits.empty() || res.down.digits.empty()) {
+                cout << "Некорректные Аргументы\n";
+                continue;
+            }
+            cout << res << endl;
         }
         else if (cmd == "SUB_QQ_Q") {
             cin >> s1 >> s2;
             big_Q a(s1), b(s2);
-            cout << SUB_QQ_Q(a, b) << endl;
+            big_Q res = SUB_QQ_Q(a, b);
+            if (res.up.digits.empty() || res.down.digits.empty()) {
+                cout << "Некорректные Аргументы\n";
+                continue;
+            }
+            cout << res << endl;
         }
         else if (cmd == "MUL_QQ_Q") {
             cin >> s1 >> s2;
             big_Q a(s1), b(s2);
-            cout << MUL_QQ_Q(a, b) << endl;
+            big_Q res = MUL_QQ_Q(a, b);
+            if (res.up.digits.empty() || res.down.digits.empty()) {
+                cout << "Некорректные Аргументы\n";
+                continue;
+            }
+            cout << res << endl;
         }
         else if (cmd == "DIV_QQ_Q") {
             cin >> s1 >> s2;
             big_Q a(s1), b(s2);
-            cout << DIV_QQ_Q(a, b) << endl;
+            big_Q res = DIV_QQ_Q(a, b);
+            if (res.up.digits.empty() || res.down.digits.empty()) {
+                cout << "Некорректные Аргументы\n";
+                continue;
+            }
+            cout << res << endl;
         }
         
         // ========== МОДУЛЬ 4: ПОЛИНОМЫ ==========
         
         else if (cmd == "ADD_PP_P") {
-            cin >> ws;
-            getline(cin, s1);
-            getline(cin, s2);
+            cin >> s1 >> s2;
             big_P a(s1), b(s2);
-            cout << ADD_PP_P(a, b) << endl;
+            if (is_empty_P(a) || is_empty_P(b)) {
+                cout << "Некорректные Аргументы\n";
+                continue;
+            }
+            big_P res = ADD_PP_P(a, b);
+            if (is_empty_P(res)) {
+                cout << "Некорректные Аргументы\n";
+                continue;
+            }
+            cout << res << endl;
         }
         else if (cmd == "SUB_PP_P") {
-            cin >> ws;
-            getline(cin, s1);
-            getline(cin, s2);
+            cin >> s1 >> s2;
             big_P a(s1), b(s2);
-            cout << SUB_PP_P(a, b) << endl;
+            if (is_empty_P(a) || is_empty_P(b)) {
+                cout << "Некорректные Аргументы\n";
+                continue;
+            }
+            big_P res = SUB_PP_P(a, b);
+            if (is_empty_P(res)) {
+                cout << "Некорректные Аргументы\n";
+                continue;
+            }
+            cout << res << endl;
         }
         else if (cmd == "MUL_PQ_P") {
-            cin >> ws;
-            getline(cin, s1);
-            cin >> s2;
+            cin >> s1 >> s2;
             big_P a(s1);
             big_Q b(s2);
-            cout << MUL_PQ_P(a, b) << endl;
+            if (is_empty_P(a)) {
+                cout << "Некорректные Аргументы\n";
+                continue;
+            }
+            big_P res = MUL_PQ_P(a, b);
+            if (is_empty_P(res)) {
+                cout << "Некорректные Аргументы\n";
+                continue;
+            }
+            cout << res << endl;
         }
         else if (cmd == "MUL_Pxk_P") {
-            cin >> ws;
-            getline(cin, s1);
-            cin >> s2;
+            cin >> s1 >> s2;
             big_P a(s1);
             big_N k(s2);
-            cout << MUL_Pxk_P(a, k) << endl;
+            if (is_empty_P(a)) {
+                cout << "Некорректные Аргументы\n";
+                continue;
+            }
+            big_P res = MUL_Pxk_P(a, k);
+            if (is_empty_P(res)) {
+                cout << "Некорректные Аргументы\n";
+                continue;
+            }
+            cout << res << endl;
         }
         else if (cmd == "LED_P_Q") {
-            cin >> ws;
-            getline(cin, s1);
+            cin >> s1;
             big_P a(s1);
-            cout << LED_P_Q(a) << endl;
+            if (is_empty_P(a)) {
+                cout << "Некорректные Аргументы\n";
+                continue;
+            }
+            big_Q res = LED_P_Q(a);
+            if (res.up.digits.empty() || res.down.digits.empty()) {
+                cout << "Некорректные Аргументы\n";
+                continue;
+            }
+            cout << res << endl;
         }
         else if (cmd == "DEG_P_N") {
-            cin >> ws;
-            getline(cin, s1);
+            cin >> s1;
             big_P a(s1);
-            cout << DEG_P_N(a) << endl;
+            if (is_empty_P(a)) {
+                cout << "Некорректные Аргументы\n";
+                continue;
+            }
+            big_N res = DEG_P_N(a);
+            if (is_empty_N(res)) {
+                cout << "Некорректные Аргументы\n";
+                continue;
+            }
+            cout << res << endl;
         }
         else if (cmd == "FAC_P_Q") {
-            cin >> ws;
-            getline(cin, s1);
+            cin >> s1;
             big_P a(s1);
-            cout << FAC_P_Q(a) << endl;
+            if (is_empty_P(a)) {
+                cout << "Некорректные Аргументы\n";
+                continue;
+            }
+            big_Q res = FAC_P_Q(a);
+            if (res.up.digits.empty() || res.down.digits.empty()) {
+                cout << "Некорректные Аргументы\n";
+                continue;
+            }
+            cout << res << endl;
         }
         else if (cmd == "MUL_PP_P") {
-            cin >> ws;
-            getline(cin, s1);
-            getline(cin, s2);
+            cin >> s1 >> s2;
             big_P a(s1), b(s2);
-            cout << MUL_PP_P(a, b) << endl;
+            if (is_empty_P(a) || is_empty_P(b)) {
+                cout << "Некорректные Аргументы\n";
+                continue;
+            }
+            big_P res = MUL_PP_P(a, b);
+            if (is_empty_P(res)) {
+                cout << "Некорректные Аргументы\n";
+                continue;
+            }
+            cout << res << endl;
         }
         else if (cmd == "DIV_PP_P") {
-            cin >> ws;
-            getline(cin, s1);
-            getline(cin, s2);
+            cin >> s1 >> s2;
             big_P a(s1), b(s2);
-            cout << DIV_PP_P(a, b) << endl;
+            if (is_empty_P(a) || is_empty_P(b)) {
+                cout << "Некорректные Аргументы\n";
+                continue;
+            }
+            big_P res = DIV_PP_P(a, b);
+            if (is_empty_P(res)) {
+                cout << "Некорректные Аргументы\n";
+                continue;
+            }
+            cout << res << endl;
         }
         else if (cmd == "MOD_PP_P") {
-            cin >> ws;
-            getline(cin, s1);
-            getline(cin, s2);
+            cin >> s1 >> s2;
             big_P a(s1), b(s2);
-            cout << MOD_PP_P(a, b) << endl;
+            if (is_empty_P(a) || is_empty_P(b)) {
+                cout << "Некорректные Аргументы\n";
+                continue;
+            }
+            big_P res = MOD_PP_P(a, b);
+            if (is_empty_P(res)) {
+                cout << "Некорректные Аргументы\n";
+                continue;
+            }
+            cout << res << endl;
         }
         else if (cmd == "GCF_PP_P") {
-            cin >> ws;
-            getline(cin, s1);
-            getline(cin, s2);
+            cin >> s1 >> s2;
             big_P a(s1), b(s2);
-            cout << GCF_PP_P(a, b) << endl;
+            if (is_empty_P(a) || is_empty_P(b)) {
+                cout << "Некорректные Аргументы\n";
+                continue;
+            }
+            big_P res = GCF_PP_P(a, b);
+            if (is_empty_P(res)) {
+                cout << "Некорректные Аргументы\n";
+                continue;
+            }
+            cout << res << endl;
         }
         else if (cmd == "DER_P_P") {
-            cin >> ws;
-            getline(cin, s1);
+            cin >> s1;
             big_P a(s1);
-            cout << DER_P_P(a) << endl;
+            if (is_empty_P(a)) {
+                cout << "Некорректные Аргументы\n";
+                continue;
+            }
+            big_P res = DER_P_P(a);
+            if (is_empty_P(res)) {
+                cout << "0\n";
+                continue;
+            }
+            cout << res << endl;
         }
         else if (cmd == "NMR_P_P") {
-            cin >> ws;
-            getline(cin, s1);
+            cin >> s1;
             big_P a(s1);
-            cout << NMR_P_P(a) << endl;
+            if (is_empty_P(a)) {
+                cout << "Некорректные Аргументы\n";
+                continue;
+            }
+            big_P res = NMR_P_P(a);
+            if (is_empty_P(res)) {
+                cout << "Некорректные Аргументы\n";
+                continue;
+            }
+            cout << res << endl;
         }
         else {
             cout << "Unknown command: " << cmd << endl;
