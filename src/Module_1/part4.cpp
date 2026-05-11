@@ -1,3 +1,7 @@
+/*
+    Разработчик: Фадеев Александр 5385
+*/
+
 #include "part0.h"
 #include "part2.h"
 #include "part3.h"

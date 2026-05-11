@@ -1,3 +1,7 @@
+/*
+    Разработчик: Тельпов Сергей 5385
+*/
+
 #include "part0.h"
 
 #ifndef _RATIONAL_PART1

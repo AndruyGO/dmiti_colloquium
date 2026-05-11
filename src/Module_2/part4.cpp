@@ -1,3 +1,7 @@
+/*
+    Разработчик: Фадеев Александр 5385
+*/
+
 #include "../Module_1/part0.h"
 #include "../Module_1/part2.h"
 #include "part0.h"

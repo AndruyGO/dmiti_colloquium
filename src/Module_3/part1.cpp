@@ -1,3 +1,7 @@
+/*
+    Разработчик: Тельпов Сергей 5385
+*/
+
 #include "part0.h"
 #include "../Module_1/natural.h"
 #include "../Module_2/part2.h"

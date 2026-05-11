@@ -1,4 +1,7 @@
-#pragma once
+/*
+    Разработчик: Зейбель Андрей 5385
+*/
+
 #ifndef _NATURAL
 #define _NATURAL
 

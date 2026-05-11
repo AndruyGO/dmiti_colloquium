@@ -1,4 +1,6 @@
-#pragma once
+/*
+    Разработчик: Зейбель Андрей 5385
+*/
 
 #ifndef _POLINOMIAL
 #define _POLINOMIAL

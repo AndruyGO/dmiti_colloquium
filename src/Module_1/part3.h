@@ -1,3 +1,7 @@
+/*
+    Разработчик: Лысенко Денис 5385
+*/
+
 #include "part0.h"
 #ifndef _NATURAL_PART3
 #define _NATURAL_PART3

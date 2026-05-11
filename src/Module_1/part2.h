@@ -1,3 +1,7 @@
+/*
+    Разработчик: Лысенко Артём 5385
+*/
+
 #include "part0.h"
 #ifndef _NATURAL_PART2
 #define _NATURAL_PART2

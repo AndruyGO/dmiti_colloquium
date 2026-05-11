@@ -1,3 +1,6 @@
+/*
+    Разработчик: Лысенко Артём 5385
+*/
 #include "part0.h"
 
 ostream& operator << (ostream& os, const big_N& n) {
@@ -7,5 +10,6 @@ ostream& operator << (ostream& os, const big_N& n) {
     }
     return os;
 }
+
 
 

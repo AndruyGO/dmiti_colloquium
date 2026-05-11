@@ -1,3 +1,7 @@
+/*
+    Разработчик: Лысенко Артём 5385
+*/
+
 #include "part0.h"
 #include "../Module_1/part1.h"
 #include "../Module_1/part3.h"

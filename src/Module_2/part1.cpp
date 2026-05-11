@@ -1,3 +1,7 @@
+/*
+    Разработчик: Тельпов Сергей 5385
+*/
+
 #include "integer.h"
 #include "../Module_1/part0.h"
 #include "../Module_1/part1.h"

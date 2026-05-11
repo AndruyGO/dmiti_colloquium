@@ -1,3 +1,7 @@
+/*
+    Разработчик: Зейбель Андрей 5385
+*/
+
 #include "../Module_1/natural.h"
 #include "../Module_2/integer.h"
 #include "../Module_3/rational.h"

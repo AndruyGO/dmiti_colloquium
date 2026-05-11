@@ -1,3 +1,7 @@
+/*
+    Разработчик: Тельпов Сергей 5385
+*/
+
 #include "part0.h"
 #include "part1.h"
 #include "part2.h"

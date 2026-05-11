@@ -1,3 +1,7 @@
+/*
+    Разработчик: Зейбель Андрей 5385
+*/
+
 #include "part0.h"
 #include "../Module_1/part4.h"
 

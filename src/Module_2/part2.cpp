@@ -1,3 +1,7 @@
+/*
+    Разработчик: Лысенко Артём 5385
+*/
+
 #include "integer.h"
 #include "../Module_1/natural.h"
 

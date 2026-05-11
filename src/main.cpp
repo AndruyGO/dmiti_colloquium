@@ -81,8 +81,8 @@ void basic_help(){
     cout << "HELP 2             - Функции модуля 2 - Целые числа" << endl;
     cout << "HELP 3             - Функции модуля 3 - Дроби" << endl;
     cout << "HELP 4             - Функции модуля 4 - Полиномы" << endl;
-    cout << "HELP 0             - Дополнительные функции" << endl;
-    cout << "HELP 5             - Вывод всех функций модулей" << endl;
+    cout << "HELP 5             - Дополнительные функции" << endl;
+    cout << "HELP 0             - Вывод всех функций модулей" << endl;
     cout << "-------------------------------------------\n" << endl;
     cout << "Введите функцию, а затем введите аргументы" << endl;
     cout << "Пример:" << endl;
@@ -90,7 +90,7 @@ void basic_help(){
     cout << "-------------------------------------------\n" << endl;
 }
 
-void help0(){ // в раззработке
+void help5(){ // в раззработке
     cout << "\n========== Дополнительные функции ==========" << endl;
     cout << "ALWAYS_PRINT_SIGN 1/0         - если 1, то знак положительных чисел будет выводится всегда" << endl;
     cout << "ALWAYS_PRINT_DENOMINATOR 1/0  - если 1, то знаменатель = 1, будет выведен" << endl;
@@ -141,24 +141,23 @@ int main() {
 
 
         if(cmd == "ALWAYS_PRINT_DENOMINATOR"){
-            int a; cin >> a;
+            cin >> s1; int a = stoi(s1);
             ALWAYS_PRINT_DENOMINATOR = a != 0;
         }
         else if(cmd == "ALWAYS_PRINT_SIGN"){
-            int a; cin >> a;
+            cin >> s1; int a = stoi(s1);
             ALWAYS_PRINT_SIGN = a != 0;
         }
         else if(cmd == "ALWAYS_REDUCE"){
-            int a; cin >> a;
+            cin >> s1; int a = stoi(s1);
             ALWAYS_REDUCE = a != 0;
         }
         else if(cmd == "HELP"){
-            int a;
-            cin >> a;
+            cin >> s1; int a = stoi(s1);
             switch (a)
             {
             case 0:
-                help0();
+                help();
                 break;
             case 1:
                 help1();
@@ -173,7 +172,7 @@ int main() {
                 help4();
                 break;
             case 5:
-                help();
+                help5();
                 break;
             default:
                 basic_help();

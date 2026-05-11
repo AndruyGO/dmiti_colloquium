@@ -1,3 +1,7 @@
+/*
+    Разработчик: Фадеев Александр 5385
+*/
+
 #include "part0.h"
 
 #ifndef _NATURAL_PART4

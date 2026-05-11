@@ -1,3 +1,7 @@
+/*
+    Разработчик: Лысенко Денис 5385
+*/
+
 #include "part3.h"
 #include "part0.h"
 #include "part1.h"

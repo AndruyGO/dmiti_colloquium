@@ -1,3 +1,7 @@
+/*
+    Разработчик: Зейбель Андрей 5385
+*/
+
 #include <iostream>
 #include <vector>
 #include <string>

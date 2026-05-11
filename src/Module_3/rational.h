@@ -1,3 +1,7 @@
+/*
+    Разработчик: Зейбель Андрей 5385
+*/
+
 #ifndef _RATIONAL
 #define _RATIONAL
 

@@ -1,3 +1,7 @@
+/*
+    Разработчик: Лысенко Денис 5385
+*/
+
 #include "part0.h"
 
 #ifndef _INTEGER_PART3
