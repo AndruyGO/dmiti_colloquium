@@ -46,6 +46,7 @@ public:
         string s = str;
         s.erase(remove_if(s.begin(), s.end(), ::isspace), s.end());
         regex pattern("^[+-]?(?:[1-9][0-9]*|0)(?:x(?:\\^(?:[1-9][0-9]*|0))?)?(?:[+-](?:[1-9][0-9]*|0)(?:x(?:\\^(?:[1-9][0-9]*|0))?)?)*$");
+
         if (!regex_match(s, pattern)) {
             monomials = {};
             return;

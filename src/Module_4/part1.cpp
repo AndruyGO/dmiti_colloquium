@@ -40,6 +40,9 @@ big_P ADD_PP_P(big_P p, big_P q) {
     while (q_it != q.monomials.end()) {
         res.monomials.push_back((*q_it++));
     }
+    if(res.monomials.empty()){
+        res.monomials.push_back(monomial(big_N("0"), big_Q("0")));
+    }
     return res;
 }
 

@@ -2,7 +2,6 @@
 #include <vector>
 #include <string>
 #include <cmath>
-#include <regex>
 
 #include "../Module_1/part0.h"
 #include "../Module_2/part0.h"
@@ -31,14 +30,11 @@ class big_Q{
     }
 
     big_Q(const string &_digits){
-
         regex pattern("^[+-]?(?:[1-9][0-9]*|0)(?:/[1-9][0-9]*)?$");
         if (!regex_match(_digits, pattern)) {
             sign = 1;
-            up = big_N("0");
-            down = big_N("1");
-            cout << "Incorrect number format or Incorrect argument type\n";
-            exit(0);
+            up = big_N("");
+            down = big_N("");
             return;
         }
         // Ищем разделитель '/'

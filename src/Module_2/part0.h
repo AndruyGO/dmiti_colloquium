@@ -33,10 +33,6 @@ class big_Z{
     big_Z(const string &_digits){
         regex pattern("^[+-]?(?:[1-9][0-9]*|0)$");
         if (!regex_match(_digits, pattern)) {
-            sign = 1;
-            digits = {0};
-            cout << "Incorrect number format or Incorrect argument type\n";
-            exit(0);
             return;
         }
         

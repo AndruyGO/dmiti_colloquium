@@ -25,9 +25,6 @@ class big_N{
         regex pattern("^[1-9][0-9]*$|^0$");
         if (!regex_match(_digits, pattern)) {
             cerr << "DEBUG: Invalid number format: '" << _digits << "' (length: " << _digits.size() << ")" << endl;
-            digits = {0};
-            cout << "Incorrect number format or Incorrect argument type\n";
-            exit(0);
             return;
         }
         unsigned long size = _digits.size();

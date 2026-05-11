@@ -4,28 +4,6 @@
 #include "../Module_1/part3.h"
 #include "../Module_1/part2.h"
 
-int IS_ZERO_P(const big_P& p) {
-    if (p.monomials.size() == 0) return 1;
-    for (int i = 0; i < (int)p.monomials.size(); i++) {
-        if (p.monomials[i].val.up.digits.size() != 1 ||
-            p.monomials[i].val.up.digits[0] != 0) {
-            return 0;
-        }
-    }
-    return 1;
-}
-
-big_P CLEAN_P(big_P p) {
-    big_P res;
-    for (int i = 0; i < (int)p.monomials.size(); i++) {
-        if (p.monomials[i].val.up.digits.size() != 1 ||
-            p.monomials[i].val.up.digits[0] != 0) {
-            res.monomials.push_back(p.monomials[i]);
-        }
-    }
-    sort(res.monomials.begin(), res.monomials.end());
-    return res;
-}
 
 big_P DER_P_P(const big_P& p) {
     if (p.monomials.size() == 0) return p;
@@ -33,10 +11,14 @@ big_P DER_P_P(const big_P& p) {
     for (int i = 0; i < (int)p.monomials.size(); i++) {
         big_N deg = p.monomials[i].degree;
         big_Q val = p.monomials[i].val;
-        if (deg.digits.size() == 1 && deg.digits[0] == 0) continue;
+
+        if (!NZER_N_B(deg)) continue; // Если степень монома 0
+
         val.up = MUL_NN_N(val.up, deg);
+        if(ALWAYS_REDUCE) val = RED_Q_Q(val);
+        
         deg = SUB_NN_N(deg, big_N("1"));
-        if (val.up.digits.size() != 1 || val.up.digits[0] != 0) {
+        if (NZER_N_B(val.up)) {
             monomial m;
             m.degree = deg;
             m.val = val;
@@ -46,15 +28,13 @@ big_P DER_P_P(const big_P& p) {
     return res;
 }
 
-big_P GCF_PP_P(const big_P& p1, const big_P& p2) {
-    big_P a = CLEAN_P(p1);
-    big_P b = CLEAN_P(p2);
+big_P GCF_PP_P(big_P a, big_P b) {
 
-    if (IS_ZERO_P(a)) return CLEAN_P(b);
-    if (IS_ZERO_P(b)) return CLEAN_P(a);
+    if (!NZER_P_B(a)) return b;
+    if (!NZER_P_B(b)) return a;
 
     int iteration = 0;
-    while (!IS_ZERO_P(b) && iteration < 100) {
+    while (NZER_P_B(b) && NZER_P_B(a) && iteration < 100) {
         iteration++;
 
         // Проверка на константу
@@ -76,26 +56,27 @@ big_P GCF_PP_P(const big_P& p1, const big_P& p2) {
             }
         }
 
-        big_P r = CLEAN_P(MOD_PP_P(a, b));
+        big_P r = MOD_PP_P(a, b);
         a = b;
         b = r;
     }
 
-    big_P res = CLEAN_P(a);
-    if (res.monomials.size() != 0 && !IS_ZERO_P(res)) {
+    big_P res = a;
+    if (res.monomials.size() != 0 && NZER_P_B(res)) {
         res = DIV_PQ_P(res, res.monomials[0].val);
     }
     return res;
 }
 
-// ─────────────────────────────────────────────────────
 // НОРМИРОВКА (NMR)
-// ─────────────────────────────────────────────────────
-
 big_P NMR_P_P(const big_P& p) {
     big_P der = DER_P_P(p);
-    if (der.monomials.empty()) return p;
-    
+
+    if (der.monomials.empty() || 
+    (der.monomials.size() == 1 && !NZER_N_B(der.monomials[0].degree))) 
+        return p;
+
+    der = DIV_PQ_P(der, LED_P_Q(der));
     big_P gcd = GCF_PP_P(p, der);
     
     // Если gcd пустой или ноль, возвращаем p

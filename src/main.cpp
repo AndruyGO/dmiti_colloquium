@@ -89,6 +89,9 @@ bool is_empty_P(const big_P& p) {
 }
 
 int main() {
+    ALWAYS_PRINT_DENOMINATOR = 0;
+    ALWAYS_PRINT_SIGN = 0;
+    ALWAYS_REDUCE = 1;
     string cmd, s1, s2, s3, s4;
     help();
     while (true) {
@@ -619,6 +622,7 @@ int main() {
             big_P a(s1), b(s2);
             if (is_empty_P(a) || is_empty_P(b)) {
                 cout << "Некорректные Аргументы\n";
+                cout << a << " " << b << "\n";
                 continue;
             }
             big_P res = MUL_PP_P(a, b);
