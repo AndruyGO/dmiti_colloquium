@@ -24,6 +24,7 @@ class big_N{
     big_N(const string &_digits){
         regex pattern("^[1-9][0-9]*$|^0$");
         if (!regex_match(_digits, pattern)) {
+            cerr << "DEBUG: Invalid number format: '" << _digits << "' (length: " << _digits.size() << ")" << endl;
             digits = {0};
             cout << "Incorrect number format or Incorrect argument type\n";
             exit(0);

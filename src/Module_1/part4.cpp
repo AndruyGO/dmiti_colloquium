@@ -26,7 +26,7 @@ big_N ADD_1N_N(big_N n){
 }
 
 big_N ADD_NN_N(const big_N &n1, const big_N &n2) {
-    big_N result("");
+    big_N result;
     result.digits.clear(); 
     
     int overflow = 0;

@@ -38,8 +38,9 @@ big_N SUB_NN_N(const big_N& x, const big_N& y) {
         if (res < 0) {
             res += 10;
             tmp = 1;
-        }
+        }else {
             tmp = 0;
+        }
         result.digits[i] = res;
     }
     for (int i = big.digits.size() - 1; result.digits[i] ==0 && i > 0; i--)

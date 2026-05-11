@@ -4,10 +4,6 @@
 #include "../Module_1/part3.h"
 #include "../Module_1/part2.h"
 
-// ─────────────────────────────────────────────────────
-// ВСПОМОГАТЕЛЬНЫЕ
-// ─────────────────────────────────────────────────────
-
 int IS_ZERO_P(const big_P& p) {
     if (p.monomials.size() == 0) return 1;
     for (int i = 0; i < (int)p.monomials.size(); i++) {
@@ -31,10 +27,6 @@ big_P CLEAN_P(big_P p) {
     return res;
 }
 
-// ─────────────────────────────────────────────────────
-// ПРОИЗВОДНАЯ
-// ─────────────────────────────────────────────────────
-
 big_P DER_P_P(const big_P& p) {
     if (p.monomials.size() == 0) return p;
     big_P res;
@@ -53,10 +45,6 @@ big_P DER_P_P(const big_P& p) {
     }
     return res;
 }
-
-// ─────────────────────────────────────────────────────
-// НОД (GCF)
-// ─────────────────────────────────────────────────────
 
 big_P GCF_PP_P(const big_P& p1, const big_P& p2) {
     big_P a = CLEAN_P(p1);
@@ -105,28 +93,16 @@ big_P GCF_PP_P(const big_P& p1, const big_P& p2) {
 // ─────────────────────────────────────────────────────
 
 big_P NMR_P_P(const big_P& p) {
-    if (p.monomials.size() == 0) return p;
-    if (IS_ZERO_P(p)) return p;
-
     big_P der = DER_P_P(p);
-    if (IS_ZERO_P(der)) return p;
-
-    big_P nod = GCF_PP_P(p, der);
-    if (IS_ZERO_P(nod)) return p;
-
-    // Проверка на константу
-    {
-        int is_const = 1;
-        for (int i = 0; i < (int)nod.monomials.size(); i++) {
-            if (NZER_N_B(nod.monomials[i].degree)) {
-                is_const = 0;
-                break;
-            }
-        }
-        if (is_const) {
-            return CLEAN_P(DIV_PQ_P(p, nod.monomials[0].val));
-        }
+    if (der.monomials.empty()) return p;
+    
+    big_P gcd = GCF_PP_P(p, der);
+    
+    // Если gcd пустой или ноль, возвращаем p
+    if (gcd.monomials.empty() || 
+        (gcd.monomials.size() == 1 && gcd.monomials[0].val.up.digits[0] == 0)) {
+        return p;
     }
-    return CLEAN_P(DIV_PP_P(p, nod));
-
+    
+    return DIV_PP_P(p, gcd);
 }

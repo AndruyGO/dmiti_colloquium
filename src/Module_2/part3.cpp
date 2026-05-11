@@ -13,13 +13,14 @@ big_Z ADD_ZZ_Z(const big_Z& x, const big_Z& y) {
     big_N nat_x, nat_y;
     if (SGN_Z_D(x) == 0) return y;
     if (SGN_Z_D(y) == 0) return x;
-    if (SGN_Z_D(x) == 1 && SGN_Z_D(y) == 1) {
+    if (SGN_Z_D(x) == 1 && SGN_Z_D(y) == 1) { // Оба больше 0
         res = TRANS_N_Z(ADD_NN_N(TRANS_Z_N(x), TRANS_Z_N(y)));
         return res;
     }
     nat_x = TRANS_Z_N(ABS_Z_Z(x));
-    nat_y = TRANS_Z_N(ABS_Z_Z(y));
+    nat_y = TRANS_Z_N(ABS_Z_Z(y)); 
     if (SGN_Z_D(x) == -1 && SGN_Z_D(y) == -1) {
+        res.sign = 1;
         res = MUL_ZM_Z(TRANS_N_Z(ADD_NN_N(nat_x, nat_y)));
         return res;
     }
